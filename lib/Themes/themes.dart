@@ -5,6 +5,7 @@ class Themes {
   ThemeData.light().copyWith(
       primaryColor: Colors.white,
     brightness: Brightness.light,
+    canvasColor: Colors.black,
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
         backgroundColor: Colors.black
     ),

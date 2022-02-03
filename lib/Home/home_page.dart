@@ -1,29 +1,54 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key, required this.title}) : super(key: key);
+  static String id ="/HomePage";
+  // const HomePage({Key? key, required this.title}) : super(key: key);
 
-  final String title;
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  // int _counter = 0;
-
-  // void _incrementCounter() {
-  //   setState(() {
-  //     _counter++;
-  //   });
-  // }
+  int currentIndex = 0;
+  final backgroundColor = Colors.grey[200];
+  final appBarColor = Colors.grey[300];
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        backgroundColor: appBarColor,
+        leading: IconButton(
+          icon: const Icon(
+            CupertinoIcons.location_fill,
+            color: Colors.black,
+          ),
+          onPressed: () {
+            Get.back();
+          },
+        ),
+        title: Text(
+          "2972 Westheimer Rd, Illinois 85486 ",
+          style: TextStyle(
+              color: Colors.black,
+              fontSize: size.height * .02
+          ),
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(
+              CupertinoIcons.bell_fill,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              Get.back();
+            },
+          ),
+        ],
       ),
       body: Center(
         child: Column(

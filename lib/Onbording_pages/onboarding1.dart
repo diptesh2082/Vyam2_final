@@ -27,7 +27,7 @@ class Onboarding1 extends StatelessWidget {
                     child: Column(
                       children: [
                         SizedBox(
-                          height: size.height*.024,
+                          height: size.height*.028,
                         ),
                         Image.asset(
                           _controller.onboardingPages[index].imageAssets,
@@ -137,8 +137,8 @@ class Onboarding1 extends StatelessWidget {
               ),
               Positioned(
                 child: SizedBox(
-                  height: size.height/25,
-                  width: size.width/5.5,
+                  height: 30,
+                  width: 60,
                   child: TextButton(
                       style: TextButton.styleFrom(
                           primary: Colors.black,
@@ -157,7 +157,7 @@ class Onboarding1 extends StatelessWidget {
                       )
                   ),
                 ),
-                top: 5,
+                top: 7,
                 right: 5,
               ),
             ],

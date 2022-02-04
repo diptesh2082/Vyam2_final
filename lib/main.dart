@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: Themes().lightTheme,
       darkTheme: Themes().darkTheme,
-      home: HomePage(),
+      home: Onboarding1(),
       // initialRoute: ,
       getPages: [
         GetPage(name: HomePage.id, page: ()=>HomePage()),

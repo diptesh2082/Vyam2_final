@@ -32,9 +32,8 @@ class FirstHome extends StatelessWidget {
         //   },
         // ),
         title: Transform(
-          transform:  Matrix4.translationValues(-20.0, 0.0, 0.0),
+          transform:  Matrix4.translationValues(-70.0, 0.0, 0.0),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               IconButton(
                 iconSize: 25,
@@ -46,11 +45,18 @@ class FirstHome extends StatelessWidget {
                   Get.back();
                 },
               ),
-              Text(
-                "2972 Westheimer Rd, Illinois 85486 ",
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: size.height * .02
+              SizedBox(
+                width: size.width*.4,
+                child: Text(
+                  "2972 Westheimer Rd, Illinois 85486 ",
+                  textAlign: TextAlign.left,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: size.height * .018,
+
+                  ),
                 ),
               ),
             ],

@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:vyam_2_final/controllers/packages/packages.dart';
 
 class ProductGyms extends StatelessWidget {
 
@@ -21,13 +23,18 @@ class ProductGyms extends StatelessWidget {
             children: [
               Stack(
                 children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(15),
-                    child: Image.asset(
-                      controller[index].imageAssets,
-                      fit: BoxFit.cover,
-                      height: size.height*.25,
-                      width: size.width*.94,
+                  GestureDetector(
+                    onTap: (){
+                      Get.to(()=>const Packeges());
+                    },
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(15),
+                      child: Image.asset(
+                        controller[index].imageAssets,
+                        fit: BoxFit.cover,
+                        height: size.height*.25,
+                        width: size.width*.94,
+                      ),
                     ),
                   ),
                   Positioned(
@@ -52,7 +59,7 @@ class ProductGyms extends StatelessWidget {
                                 fontWeight: FontWeight.w600),
                           ),
                           SizedBox(
-                            height: 5,
+                            height: 2,
                           ),
                           Text(
                             "Bus stand, Barakar",
@@ -73,7 +80,7 @@ class ProductGyms extends StatelessWidget {
                     child: Container(
                       color: Colors.black26,
                       alignment: Alignment.bottomRight,
-                      height: size.height*.08,
+                      height: size.height*.09,
                       width: size.width*.22,
                       padding: const EdgeInsets.only(right: 8, bottom: 10),
                       child: Column(
@@ -105,7 +112,7 @@ class ProductGyms extends StatelessWidget {
                             ],
                           ),
                           const SizedBox(
-                            height: 5,
+                            height: 3,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,

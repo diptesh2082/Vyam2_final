@@ -62,6 +62,8 @@ flutter:
     - assets/images/
     - assets/icons/
     - assets/Illustrations/
+    - assets/cards/
+    - assets/photos/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -78,7 +80,7 @@ flutter:
     - family: Poppins
       fonts:
         - asset: assets/fonts/Poppins-Bold.ttf
-          weight: 700
+          weight: 600
         - asset: assets/fonts/Poppins-Light.ttf
           weight: 400
           style: italic

@@ -1,6 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:vyam_2_final/Home/views/first_home.dart';
+import 'package:vyam_2_final/Home/views/gyms.dart';
+import 'package:vyam_2_final/Home/views/product_gyms.dart';
+import 'package:vyam_2_final/Home/views/yoga.dart';
+import 'package:vyam_2_final/Home/views/zumba.dart';
+import 'package:vyam_2_final/controllers/home_controller.dart';
+
 
 class HomePage extends StatefulWidget {
   static String id ="/HomePage";
@@ -15,63 +22,59 @@ class _HomePageState extends State<HomePage> {
   int currentIndex = 0;
   final backgroundColor = Colors.grey[200];
   final appBarColor = Colors.grey[300];
-
+  final HomeController controller = Get.put(HomeController());
+  final screens = [
+    FirstHome(),
+  ];
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: appBarColor,
-        leading: IconButton(
-          icon: const Icon(
-            CupertinoIcons.location_fill,
-            color: Colors.black,
-          ),
-          onPressed: () {
-            Get.back();
-          },
-        ),
-        title: Text(
-          "2972 Westheimer Rd, Illinois 85486 ",
-          style: TextStyle(
-              color: Colors.black,
-              fontSize: size.height * .02
-          ),
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(
-              CupertinoIcons.bell_fill,
-              color: Colors.black,
-            ),
-            onPressed: () {
-              Get.back();
-            },
-          ),
+      body: screens[currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Colors.white,
+        selectedItemColor: Colors.black87,
+        unselectedItemColor: Colors.black38,
+        iconSize: 27,
+        selectedFontSize: 15,
+        unselectedFontSize: 12,
+        currentIndex: currentIndex,
+        onTap: (index) => setState(() {
+          currentIndex = index;
+        }),
+        items: const [
+          BottomNavigationBarItem(
+              icon: Icon(
+                CupertinoIcons.house,
+                // color: Colors.black,
+              ),
+              label: 'Home',
+              ),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.library_books_outlined
+                // color: Colors.black87,
+              ),
+              label: 'Bookings',
+              ),
+          BottomNavigationBarItem(
+              icon: Icon(
+                CupertinoIcons.compass,
+                // color: Colors.black87,
+              ),
+              label: 'Explore',
+              ),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.account_box_outlined,
+                // color: Colors.black87,
+              ),
+              label: 'Profile',
+              ),
         ],
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              Get.isDarkMode ? "Dark" : "Light",
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {Get.changeThemeMode(
-            Get.isDarkMode ? ThemeMode.light : ThemeMode.dark
-        );
-        },
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+       // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

@@ -20,9 +20,9 @@ class MyApp extends StatelessWidget {
 
     return GetMaterialApp(
       title: 'Flutter Demo',
-      theme: Themes().lightTheme,
+      // theme: Themes().lightTheme,
       darkTheme: Themes().darkTheme,
-      home: Onboarding1(),
+      home: HomePage(),
       // initialRoute: ,
       getPages: [
         GetPage(name: HomePage.id, page: ()=>HomePage()),

@@ -38,7 +38,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
       backgroundColor: backgroundColor,
         appBar: AppBar(
           centerTitle: true,
-          backgroundColor: backgroundColor,
+          backgroundColor: Colors.grey[100],
           leading: IconButton(
             icon: const Icon(
                 Icons.arrow_back_ios_new,

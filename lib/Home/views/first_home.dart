@@ -32,7 +32,7 @@ class FirstHome extends StatelessWidget {
         //   },
         // ),
         title: Transform(
-          transform:  Matrix4.translationValues(-70.0, 0.0, 0.0),
+          transform:  Matrix4.translationValues(-20.0, 0.0, 0.0),
           child: Row(
             children: [
               IconButton(
@@ -127,6 +127,7 @@ class FirstHome extends StatelessWidget {
               SizedBox(
                 height: size.height*.2,
                 child: ListView.builder(
+                  shrinkWrap: true,
                   itemCount: controller.OptionsList.length,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context,int index){

@@ -1,14 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:vyam_2_final/Home/profile_page.dart';
 import 'package:vyam_2_final/Home/views/first_home.dart';
 import 'package:vyam_2_final/Home/views/gyms.dart';
-import 'package:vyam_2_final/Home/views/product_gyms.dart';
-import 'package:vyam_2_final/Home/views/yoga.dart';
-import 'package:vyam_2_final/Home/views/zumba.dart';
+import "package:vyam_2_final/booking/booking.dart";
 import 'package:vyam_2_final/Notifications/notification.dart';
 import 'package:vyam_2_final/controllers/home_controller.dart';
-import 'package:vyam_2_final/controllers/packages/bookingDetails.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -25,16 +23,16 @@ class _HomePageState extends State<HomePage> {
   final backgroundColor = Colors.grey[200];
   final appBarColor = Colors.grey[300];
   final HomeController controller = Get.put(HomeController());
-  final screens = [
+  final screens =<Widget> [
     FirstHome(),
-    const GymOption()
-    // BookingDetails(),
-    // NotificationDetails(),
+    const BookingDetails(),
+    const ProfilePart(),
   ];
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      endDrawer: const ProfilePart(),
       body: screens[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,

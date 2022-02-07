@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:vyam_2_final/controllers/packages/packages.dart';
+
+import '../../packages/packages.dart';
 
 class ProductGyms extends StatelessWidget {
 

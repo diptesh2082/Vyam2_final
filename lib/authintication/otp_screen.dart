@@ -128,7 +128,9 @@ class OtpPage extends StatelessWidget {
                           height: size.height/17,
                           child: ElevatedButton(
                             onPressed: () {
-                              Get.toNamed(RegistrationPage.id);
+                              Get.toNamed(RegistrationPage.id,
+                              // arguments: [{"fast_appbar": "Register"}]
+                              );
                             },
                             child: const Text(
                               "Verify",

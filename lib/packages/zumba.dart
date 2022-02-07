@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:vyam_2_final/controllers/packages/bookingDetails.dart';
 
-import '../package_controller.dart';
-class YogaList extends StatelessWidget {
-  YogaList({
+import 'bookingDetails.dart';
+import '../controllers/package_controller.dart';
+
+class ZumbaList extends StatelessWidget {
+  ZumbaList({
     Key? key,
     required double width,
   })  : _width = width,
@@ -25,17 +26,16 @@ class YogaList extends StatelessWidget {
       child: Theme(
         data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
         child: ExpansionTile(
-          backgroundColor: Colors.transparent,
-          title: Text("Yoga",
+          title: Text("Zumba",
               style: GoogleFonts.poppins(
-                  fontSize: 15,
+                  fontSize: 14,
                   color: HexColor("3A3A3A"),
                   fontWeight: FontWeight.w600)),
           children: [
             ListView.builder(
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                itemCount: yoga.length,
+                itemCount: zumba.length,
                 itemBuilder: (context, snapshot) {
                   return Padding(
                     padding: const EdgeInsets.all(15.0),
@@ -54,9 +54,9 @@ class YogaList extends StatelessWidget {
                             Row(
                               children: [
                                 Text(
-                                  yoga[snapshot].title,
+                                  zumba[snapshot].title,
                                   style: GoogleFonts.poppins(
-                                      fontSize: 15,
+                                      fontSize: 14,
                                       color: HexColor("3A3A3A"),
                                       fontWeight: FontWeight.w600),
                                 ),
@@ -91,7 +91,7 @@ class YogaList extends StatelessWidget {
                                         Row(
                                           children: [
                                             Text(
-                                              "\$${yoga[snapshot].orginalPrice}",
+                                              "\$${zumba[snapshot].orginalPrice}",
                                               style: GoogleFonts.poppins(
                                                   decoration: TextDecoration
                                                       .lineThrough,
@@ -100,12 +100,12 @@ class YogaList extends StatelessWidget {
                                                   fontWeight: FontWeight.w600),
                                             ),
                                             const SizedBox(
-                                              width: 1,
+                                              width: 3,
                                             ),
                                             Text(
-                                              "\$${yoga[snapshot].price}",
+                                              "\$${zumba[snapshot].price}",
                                               style: GoogleFonts.poppins(
-                                                  fontSize: 15,
+                                                  fontSize: 14,
                                                   color: HexColor("3A3A3A"),
                                                   fontWeight: FontWeight.w600),
                                             ),
@@ -129,7 +129,7 @@ class YogaList extends StatelessWidget {
                             ),
                             Row(
                               children: [
-                                RaisedButton(
+                                MaterialButton(
                                   elevation: 0,
                                   onPressed: () {},
                                   color: Colors.transparent,
@@ -146,11 +146,11 @@ class YogaList extends StatelessWidget {
                                               fontWeight: FontWeight.w600))),
                                 ),
                                 const Spacer(),
-                                RaisedButton(
+                                MaterialButton(
                                   elevation: 0,
                                   onPressed: () {
                                     bookingDetails.bookingDetails(
-                                        context, snapshot, yoga, "Yoga ");
+                                        context, snapshot, zumba, "Zumba ");
                                   },
                                   color: HexColor("292F3D"),
                                   shape: RoundedRectangleBorder(
@@ -176,3 +176,4 @@ class YogaList extends StatelessWidget {
     );
   }
 }
+

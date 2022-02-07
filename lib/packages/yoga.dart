@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:vyam_2_final/controllers/packages/bookingDetails.dart';
-import '';
-import '../package_controller.dart';
+import 'bookingDetails.dart';
+import 'bookingDetails.dart';
+import '../controllers/package_controller.dart';
 
-class ZumbaList extends StatelessWidget {
-  ZumbaList({
+class YogaList extends StatelessWidget {
+  YogaList({
     Key? key,
     required double width,
   })  : _width = width,
@@ -26,16 +26,17 @@ class ZumbaList extends StatelessWidget {
       child: Theme(
         data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
         child: ExpansionTile(
-          title: Text("Zumba",
+          backgroundColor: Colors.transparent,
+          title: Text("Yoga",
               style: GoogleFonts.poppins(
-                  fontSize: 14,
+                  fontSize: 15,
                   color: HexColor("3A3A3A"),
                   fontWeight: FontWeight.w600)),
           children: [
             ListView.builder(
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                itemCount: zumba.length,
+                itemCount: yoga.length,
                 itemBuilder: (context, snapshot) {
                   return Padding(
                     padding: const EdgeInsets.all(15.0),
@@ -54,9 +55,9 @@ class ZumbaList extends StatelessWidget {
                             Row(
                               children: [
                                 Text(
-                                  zumba[snapshot].title,
+                                  yoga[snapshot].title,
                                   style: GoogleFonts.poppins(
-                                      fontSize: 14,
+                                      fontSize: 15,
                                       color: HexColor("3A3A3A"),
                                       fontWeight: FontWeight.w600),
                                 ),
@@ -91,7 +92,7 @@ class ZumbaList extends StatelessWidget {
                                         Row(
                                           children: [
                                             Text(
-                                              "\$${zumba[snapshot].orginalPrice}",
+                                              "\$${yoga[snapshot].orginalPrice}",
                                               style: GoogleFonts.poppins(
                                                   decoration: TextDecoration
                                                       .lineThrough,
@@ -100,12 +101,12 @@ class ZumbaList extends StatelessWidget {
                                                   fontWeight: FontWeight.w600),
                                             ),
                                             const SizedBox(
-                                              width: 3,
+                                              width: 1,
                                             ),
                                             Text(
-                                              "\$${zumba[snapshot].price}",
+                                              "\$${yoga[snapshot].price}",
                                               style: GoogleFonts.poppins(
-                                                  fontSize: 14,
+                                                  fontSize: 15,
                                                   color: HexColor("3A3A3A"),
                                                   fontWeight: FontWeight.w600),
                                             ),
@@ -129,7 +130,7 @@ class ZumbaList extends StatelessWidget {
                             ),
                             Row(
                               children: [
-                                MaterialButton(
+                                RaisedButton(
                                   elevation: 0,
                                   onPressed: () {},
                                   color: Colors.transparent,
@@ -146,11 +147,11 @@ class ZumbaList extends StatelessWidget {
                                               fontWeight: FontWeight.w600))),
                                 ),
                                 const Spacer(),
-                                MaterialButton(
+                                RaisedButton(
                                   elevation: 0,
                                   onPressed: () {
                                     bookingDetails.bookingDetails(
-                                        context, snapshot, zumba, "Zumba ");
+                                        context, snapshot, yoga, "Yoga ");
                                   },
                                   color: HexColor("292F3D"),
                                   shape: RoundedRectangleBorder(
@@ -176,4 +177,3 @@ class ZumbaList extends StatelessWidget {
     );
   }
 }
-

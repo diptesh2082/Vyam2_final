@@ -66,85 +66,83 @@ class NotificationDetails extends StatelessWidget {
                             itemBuilder: (context, index) {
                               return Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: Container(
-                                  child: Card(
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(8)),
-                                    elevation: 8,
-                                    color: Colors.transparent,
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(8)),
-                                      width: _width * 0.9,
-                                      child: Row(
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                top: 22.0,
-                                                left: 18,
-                                                bottom: 22),
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                if (notificationList[index]
-                                                    .type
-                                                    .contains("Coupon"))
-                                                  Row(
-                                                    children: [
-                                                      Text(
-                                                        notificationList[index]
-                                                            .notiTitle,
-                                                        style:
-                                                            GoogleFonts.poppins(
-                                                                color: HexColor(
-                                                                    "3A3A3A"),
-                                                                fontSize: 14,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600),
-                                                      ),
-                                                      const SizedBox(
-                                                        width: 80,
-                                                      ),
-                                                      Image.asset(
-                                                          "assets/icons/discount.png")
-                                                    ],
-                                                  ),
-                                                if (notificationList[index]
-                                                    .type
-                                                    .contains("None"))
-                                                  Text(
-                                                    notificationList[index]
-                                                        .notiTitle,
-                                                    style: GoogleFonts.poppins(
-                                                        color:
-                                                            HexColor("3A3A3A"),
-                                                        fontSize: 14,
-                                                        fontWeight:
-                                                            FontWeight.w600),
-                                                  ),
-                                                const SizedBox(
-                                                  height: 4,
+                                child: Card(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8)),
+                                  elevation: 8,
+                                  color: Colors.transparent,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius:
+                                            BorderRadius.circular(8)),
+                                    width: _width * 0.9,
+                                    child: Row(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              top: 22.0,
+                                              left: 18,
+                                              bottom: 22),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              if (notificationList[index]
+                                                  .type
+                                                  .contains("Coupon"))
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      notificationList[index]
+                                                          .notiTitle,
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                              color: HexColor(
+                                                                  "3A3A3A"),
+                                                              fontSize: 14,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600),
+                                                    ),
+                                                    const SizedBox(
+                                                      width: 80,
+                                                    ),
+                                                    Image.asset(
+                                                        "assets/icons/discount.png")
+                                                  ],
                                                 ),
+                                              if (notificationList[index]
+                                                  .type
+                                                  .contains("None"))
                                                 Text(
                                                   notificationList[index]
-                                                      .detail,
+                                                      .notiTitle,
                                                   style: GoogleFonts.poppins(
-                                                      color: HexColor("AFAFAF"),
-                                                      fontSize: 12,
+                                                      color:
+                                                          HexColor("3A3A3A"),
+                                                      fontSize: 14,
                                                       fontWeight:
-                                                          FontWeight.w400),
+                                                          FontWeight.w600),
                                                 ),
-                                              ],
-                                            ),
+                                              const SizedBox(
+                                                height: 4,
+                                              ),
+                                              Text(
+                                                notificationList[index]
+                                                    .detail,
+                                                style: GoogleFonts.poppins(
+                                                    color: HexColor("AFAFAF"),
+                                                    fontSize: 12,
+                                                    fontWeight:
+                                                        FontWeight.w400),
+                                              ),
+                                            ],
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ),

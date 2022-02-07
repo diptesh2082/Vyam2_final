@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:vyam_2_final/controllers/packages/yoga.dart';
-import 'package:vyam_2_final/controllers/packages/zumba.dart';
+import 'package:vyam_2_final/packages/yoga.dart';
+import 'package:vyam_2_final/packages/zumba.dart';
 
-import '../package_controller.dart';
+import '../controllers/package_controller.dart';
 import 'bookingDetails.dart';
 import 'neargym.dart';
 

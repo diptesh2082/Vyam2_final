@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
-import 'package:vyam_2_final/Home/profile_page.dart';
+import 'package:vyam_2_final/Home/profile/profile_page.dart';
 import 'package:vyam_2_final/Home/views/first_home.dart';
 import 'package:vyam_2_final/booking/booking.dart';
 import 'package:vyam_2_final/controllers/home_controller.dart';

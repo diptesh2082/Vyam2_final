@@ -20,7 +20,7 @@ class OlderEvent extends StatelessWidget {
 
   Future OlderEventsList() async {
     events = olderEventItems;
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(milliseconds: 700));
     if (events.isNotEmpty) {
       return events;
     }

@@ -17,7 +17,7 @@ class UpcomingEvent extends StatelessWidget {
 
   Future upcomingEventsList() async {
     events = upcomingItems;
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(milliseconds: 500));
     if (events.isNotEmpty) {
       return events;
     }

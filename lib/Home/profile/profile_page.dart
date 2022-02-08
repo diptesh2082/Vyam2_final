@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:vyam_2_final/Home/profile/profile.dart';
 import 'package:vyam_2_final/authintication/regitration_from.dart';
 
 class ProfilePart extends StatelessWidget {
@@ -44,20 +45,41 @@ class ProfilePart extends StatelessWidget {
                         children: [
                           Padding(
                             padding: EdgeInsets.only(left: size.width*.01),
-                            child: CircleAvatar(
-                                radius: size.width/7,
-                                backgroundColor: Colors.amberAccent,
-                                child: IconButton(
-                                  iconSize: size.width*.24,
-                                  onPressed: (){
-                                    // pickImage(ImageSource.gallery);
-                                  },
-                                  icon: Icon(
-                                    Icons.camera_alt_outlined,
-                                    size: size.width*.11,
-                                    color: Colors.black87,
+                            child: Stack(
+                              children: [
+                                Align(
+                                  alignment: Alignment.center,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(80),
+                                      color: Colors.black,
+                                    ),
+                                    height: 115,
+                                    width: 115,
+
                                   ),
-                                )
+                                ),
+                                Positioned(
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: CircleAvatar(
+                                        radius: size.width/7,
+                                        backgroundColor: Colors.yellowAccent,
+                                        child: IconButton(
+                                          iconSize: 100,
+                                          onPressed: (){
+                                            // pickImage(ImageSource.gallery);
+                                          },
+                                          icon: const Icon(
+                                            Icons.add_a_photo_outlined,
+                                            size: 70,
+                                            color: Colors.black87,
+                                          ),
+                                        )
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                           const SizedBox(
@@ -97,11 +119,7 @@ class ProfilePart extends StatelessWidget {
                             padding: const EdgeInsets.only(bottom: 50.0),
                             child: IconButton(
                                 onPressed: (){
-                                  Get.toNamed(RegistrationPage.id,
-                                  arguments: [
-                                    {"appbar": "Profile"}
-                                  ]
-                                  );
+                                  Get.to(()=>Profile());
                                 },
                                 icon: const Icon(Icons.edit)
                             ),

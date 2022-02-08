@@ -14,7 +14,7 @@ class GymOption extends StatefulWidget {
 
 class _GymOptionState extends State<GymOption> {
   var groupValue = 0;
-  final appBarColor =Colors.grey[300];
+  final appBarColor =Colors.grey[100];
   final controller = Get.find<HomeController>();
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class _GymOptionState extends State<GymOption> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: appBarColor,
+        backgroundColor: Colors.grey[100],
         leading: IconButton(
           icon: const Icon(
             Icons.arrow_back_ios_new,
@@ -47,7 +47,7 @@ class _GymOptionState extends State<GymOption> {
             children: [
               CupertinoSlidingSegmentedControl<int>(
                   groupValue: groupValue,
-                  thumbColor: Colors.black38,
+                  thumbColor: Colors.yellowAccent,
                   padding: const EdgeInsets.all(8),
                   children:  {
                     0: buildSegment("All"),

@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class GlobalSnacbar {
   void showError(String error, String errorMsg) {
+    // ignore: unused_local_variable
     final snackBar = Get.snackbar(
       "",
       "",

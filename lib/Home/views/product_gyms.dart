@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:vyam_2_final/Home/gym_detail/gym_details.dart';
 import 'package:vyam_2_final/controllers/packages/packages.dart';
 
 class ProductGyms extends StatelessWidget {
@@ -27,7 +28,7 @@ class ProductGyms extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: (){
-                        Get.to(()=>const Packeges());
+                        Get.to(()=>const Screen1());
                       },
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(15),

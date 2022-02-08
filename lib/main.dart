@@ -7,17 +7,18 @@ import 'package:vyam_2_final/authintication/otp_screen.dart';
 import 'package:vyam_2_final/authintication/regitration_from.dart';
 
 import 'Home/home_page.dart';
+
 void main() {
   runApp(const MyApp());
 }
 
+//Rishabh
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-
     return GetMaterialApp(
       title: 'Flutter Demo',
       // theme: Themes().lightTheme,
@@ -25,13 +26,12 @@ class MyApp extends StatelessWidget {
       home: HomePage(),
       // initialRoute: ,
       getPages: [
-        GetPage(name: HomePage.id, page: ()=>HomePage()),
-        GetPage(name: "/login", page: ()=>const LoginPage()),
-        GetPage(name: OtpPage.id, page: ()=>const OtpPage()),
-        GetPage(name: RegistrationPage.id, page: ()=>const RegistrationPage()),
-
+        GetPage(name: HomePage.id, page: () => HomePage()),
+        GetPage(name: "/login", page: () => const LoginPage()),
+        GetPage(name: OtpPage.id, page: () => const OtpPage()),
+        GetPage(
+            name: RegistrationPage.id, page: () => const RegistrationPage()),
       ],
     );
   }
 }
-

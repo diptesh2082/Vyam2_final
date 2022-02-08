@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:vyam_2_final/Onbording_pages/onboarding1.dart';
 import 'package:vyam_2_final/Themes/themes.dart';
 import 'package:vyam_2_final/authintication/login.dart';
 import 'package:vyam_2_final/authintication/otp_screen.dart';
 import 'package:vyam_2_final/authintication/regitration_from.dart';
+import 'package:vyam_2_final/global_snackbar.dart';
 
 import 'Home/home_page.dart';
 
@@ -12,7 +12,6 @@ void main() {
   runApp(const MyApp());
 }
 
-//Rishabh Bansal
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -21,8 +20,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Flutter Demo',
-      // theme: Themes().lightTheme,
-      darkTheme: Themes().darkTheme,
+      theme: Themes().lightTheme,
+
       home: HomePage(),
       // initialRoute: ,
       getPages: [

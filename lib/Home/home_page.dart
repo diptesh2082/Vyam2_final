@@ -1,84 +1,105 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:vyam_2_final/Home/profile_page.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:vyam_2_final/Home/views/first_home.dart';
-import 'package:vyam_2_final/Home/views/gyms.dart';
-import "package:vyam_2_final/booking/booking.dart";
-import 'package:vyam_2_final/Notifications/notification.dart';
+import 'package:vyam_2_final/booking/booking.dart';
 import 'package:vyam_2_final/controllers/home_controller.dart';
 
-
 class HomePage extends StatefulWidget {
-  static String id ="/HomePage";
+  static String id = "/HomePage";
   // const HomePage({Key? key, required this.title}) : super(key: key);
-
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+  final PersistentTabController _controller =
+      PersistentTabController(initialIndex: 0);
+  List<PersistentBottomNavBarItem> _navBarsItems() {
+    return [
+      PersistentBottomNavBarItem(
+        icon: const Icon(CupertinoIcons.home),
+        title: ("Home"),
+        activeColorPrimary: CupertinoColors.black,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
+      ),
+      PersistentBottomNavBarItem(
+        icon: const Icon(Icons.book),
+        title: ("Bookings"),
+        activeColorPrimary: CupertinoColors.black,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
+      ),
+      PersistentBottomNavBarItem(
+        icon: const Icon(Icons.explore),
+        title: ("Explore"),
+        activeColorPrimary: CupertinoColors.black,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
+      ),
+      PersistentBottomNavBarItem(
+        icon: const Icon(CupertinoIcons.profile_circled),
+        title: ("Profile"),
+        activeColorPrimary: CupertinoColors.black,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
+      ),
+    ];
+  }
+
+  List<Widget> _buildScreens() {
+    return [
+      FirstHome(),
+      const BookingDetails(),
+      Scaffold(
+        backgroundColor: Colors.blueGrey,
+        body: Container(),
+      ),
+      Scaffold(
+        backgroundColor: Colors.blueGrey,
+        body: Container(),
+      ),
+    ];
+  }
+
   int currentIndex = 0;
   final backgroundColor = Colors.grey[200];
   final appBarColor = Colors.grey[300];
   final HomeController controller = Get.put(HomeController());
-  final screens =<Widget> [
+  final screens = [
     FirstHome(),
     const BookingDetails(),
-    const ProfilePart(),
+    const BookingDetails(),
+    const BookingDetails(),
+    // BookingDetails(),
+    // NotificationDetails(),
   ];
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
-      endDrawer: const ProfilePart(),
-      body: screens[currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
+      body: PersistentTabView(
+        context,
+        controller: _controller,
+        screens: _buildScreens(),
+        items: _navBarsItems(),
+        confineInSafeArea: true,
         backgroundColor: Colors.white,
-        selectedItemColor: Colors.black87,
-        unselectedItemColor: Colors.black38,
-        iconSize: 27,
-        selectedFontSize: 15,
-        unselectedFontSize: 12,
-        currentIndex: currentIndex,
-        onTap: (index) => setState(() {
-          currentIndex = index;
-        }),
-        items: const [
-          BottomNavigationBarItem(
-              icon: Icon(
-                CupertinoIcons.house,
-                // color: Colors.black,
-              ),
-              label: 'Home',
-              ),
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.library_books_outlined
-                // color: Colors.black87,
-              ),
-              label: 'Bookings',
-              ),
-          BottomNavigationBarItem(
-              icon: Icon(
-                CupertinoIcons.compass,
-                // color: Colors.black87,
-              ),
-              label: 'Explore',
-              ),
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.account_box_outlined,
-                // color: Colors.black87,
-              ),
-              label: 'Profile',
-              ),
-        ],
+        handleAndroidBackButtonPress: true,
+        resizeToAvoidBottomInset: true,
+        stateManagement: true,
+        hideNavigationBarWhenKeyboardShows: true,
+        popAllScreensOnTapOfSelectedTab: true,
+        popActionScreens: PopActionScreensType.all,
+        itemAnimationProperties: const ItemAnimationProperties(
+          duration: Duration(milliseconds: 200),
+          curve: Curves.ease,
+        ),
+        screenTransitionAnimation: const ScreenTransitionAnimation(
+          animateTabTransition: true,
+          curve: Curves.ease,
+          duration: Duration(milliseconds: 200),
+        ),
+        navBarStyle: NavBarStyle.style3,
       ),
-       // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
-

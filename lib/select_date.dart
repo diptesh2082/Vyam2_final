@@ -98,7 +98,7 @@ class _SelectDateState extends State<SelectDate> {
       backgroundColor: Colors.grey[200],
       body: SingleChildScrollView(
         child: SizedBox(
-          height: _height*1.05,
+          height: _height * 1.05,
           child: Padding(
             padding: const EdgeInsets.all(5.0),
             child: Column(
@@ -107,7 +107,8 @@ class _SelectDateState extends State<SelectDate> {
                   child: Container(
                     width: _width * 0.9,
                     decoration: BoxDecoration(
-                        color: Colors.white, borderRadius: BorderRadius.circular(15)),
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(15)),
                     child: TableCalendar(
                       daysOfWeekStyle: DaysOfWeekStyle(
                           weekendStyle: GoogleFonts.poppins(
@@ -125,13 +126,17 @@ class _SelectDateState extends State<SelectDate> {
                         _selectedDay = selectedDay;
                         _focusedDay = _selectedDay;
                         day = _selectedDay.day.toString();
-                        endday =
-                            _selectedDay.add(Duration(days: getDays)).day.toString();
+                        endday = _selectedDay
+                            .add(Duration(days: getDays))
+                            .day
+                            .toString();
                         current_mon = _selectedDay.month;
                         selected_week = _selectedDay.weekday;
 
-                        end_mon = _selectedDay.add(Duration(days: getDays)).month;
-                        end_week = _selectedDay.add(Duration(days: getDays)).weekday;
+                        end_mon =
+                            _selectedDay.add(Duration(days: getDays)).month;
+                        end_week =
+                            _selectedDay.add(Duration(days: getDays)).weekday;
                       }),
                       calendarStyle: CalendarStyle(
                           canMarkersOverflow: true,
@@ -144,8 +149,10 @@ class _SelectDateState extends State<SelectDate> {
                             color: Colors.grey,
                           )),
                       headerStyle: HeaderStyle(
-                          leftChevronIcon: Image.asset("assets/icons/Arrow.png"),
-                          rightChevronIcon: Image.asset("assets/icons/Arrow01.png"),
+                          leftChevronIcon:
+                              Image.asset("assets/icons/Arrow.png"),
+                          rightChevronIcon:
+                              Image.asset("assets/icons/Arrow01.png"),
                           formatButtonVisible: false,
                           titleCentered: true,
                           titleTextStyle: GoogleFonts.poppins(
@@ -165,7 +172,8 @@ class _SelectDateState extends State<SelectDate> {
                   child: Container(
                     width: _width * 0.9,
                     decoration: BoxDecoration(
-                        color: Colors.white, borderRadius: BorderRadius.circular(15)),
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(15)),
                     child: Column(
                       children: [
                         const SizedBox(
@@ -219,8 +227,8 @@ class _SelectDateState extends State<SelectDate> {
                                     shape: BoxShape.circle,
                                     color: HexColor("FFCA00")),
                                 child: Center(
-                                  child:
-                                  Image.asset("assets/icons/Arrow - Right.png"),
+                                  child: Image.asset(
+                                      "assets/icons/Arrow - Right.png"),
                                 ),
                               ),
                               const Spacer(),
@@ -264,7 +272,8 @@ class _SelectDateState extends State<SelectDate> {
                   height: 20,
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 16.0, left: 16, right: 16),
+                  padding:
+                      const EdgeInsets.only(bottom: 16.0, left: 16, right: 16),
                   child: MaterialButton(
                     color: HexColor("292F3D"),
                     shape: RoundedRectangleBorder(

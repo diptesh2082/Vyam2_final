@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -15,21 +16,22 @@ class RegistrationPage extends StatefulWidget {
 }
 
 class _RegistrationPageState extends State<RegistrationPage> {
-  File? image;
-  Future pickImage(ImageSource imageType) async {
-    try{
-      var image = await ImagePicker().pickImage(source:ImageSource.gallery);
-      if (image==null) return;
-      final imageTemporary = File(image.path);
-      setState(() {
-        image = imageTemporary as XFile?;
-      });
-      Get.back();
-    }catch(error){
-      debugPrint(error.toString());
-    }
-
-  }
+  var groupValue = 0;
+  // File? image;
+  // Future pickImage(ImageSource imageType) async {
+  //   try{
+  //     var image = await ImagePicker().pickImage(source:ImageSource.gallery);
+  //     if (image==null) return;
+  //     final imageTemporary = File(image.path);
+  //     setState(() {
+  //       image = imageTemporary as XFile?;
+  //     });
+  //     Get.back();
+  //   }catch(error){
+  //     debugPrint(error.toString());
+  //   }
+  //
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -62,48 +64,38 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 padding: EdgeInsets.only(top: size.height/15),
                 child: Stack(
                   children: [
+                    Align(
+                      alignment: Alignment.center,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(80),
+                          color: Colors.black,
+                        ),
+                        height: 115,
+                        width: 115,
+
+                      ),
+                    ),
                     Positioned(
                       child: Align(
                         alignment: Alignment.center,
                         child: CircleAvatar(
                             radius: size.width/7,
-                          backgroundColor: Colors.amberAccent,
+                          backgroundColor: Colors.yellowAccent,
                           child: IconButton(
-                            iconSize: size.width*.24,
+                            iconSize: 100,
                             onPressed: (){
                               // pickImage(ImageSource.gallery);
                             },
-                            icon: Icon(
-                                Icons.camera_alt_outlined,
-                              size: size.width*.11,
+                            icon: const Icon(
+                                Icons.add_a_photo_outlined,
+                              size: 70,
                               color: Colors.black87,
                             ),
                           )
                         ),
                       ),
                     ),
-                    Positioned(
-                      child: Align(
-                        alignment: Alignment.center,
-                        child: ClipOval(
-                          // child: image != null ? Image.file(
-                          //     image!,
-                          //
-                          // ):
-                          child:IconButton(
-                            iconSize: size.width*.24,
-                            onPressed: (){
-                              // pickImage(ImageSource.gallery);
-                            },
-                            icon: Icon(
-                              Icons.camera_alt_outlined,
-                              size: size.width*.11,
-                              color: Colors.black87,
-                            ),
-                          )
-                        ),
-                      ),
-                    )
                   ],
                 ),
               ),
@@ -170,7 +162,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       )
                   ),
                   textInputAction: TextInputAction.next,
-                  cursorColor: Colors.orangeAccent,
+                  cursorColor: Colors.yellowAccent,
                   // autofocus: true,
                 ),
               ),
@@ -197,82 +189,66 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         const SizedBox(
                           height: 15,
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                              Padding(
-                                padding: const EdgeInsets.only(right: 5),
-                                child: SizedBox(
-                                  width: size.width*.22,
-                                  child: ElevatedButton(onPressed: (){
-
-                                  },
-                                      style: ElevatedButton.styleFrom(
-                                        primary: Colors.white
-                                      ),
-                                      child: const Text("Male",
-                                        style: TextStyle(
-                                            color: Colors.black87
-                                        ),
-                                      )
-                                  ),
-                                ),
-                              ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 5.0),
-                              child: SizedBox(
-                                width: size.width*.22,
-                                child: ElevatedButton(onPressed: (){
-
-                                },
-
-                                    style: ElevatedButton.styleFrom(
-                                        primary: Colors.white
-                                    ),
-                                    child: const Text(
-                                        "Female",
-                                      style: TextStyle(
-                                        color: Colors.black87
-                                      ),
-                                    )
-                                ),
-                              ),
-                            )
-                          ],
+                        CupertinoSlidingSegmentedControl<int>(
+                            groupValue: groupValue,
+                            thumbColor: Colors.yellowAccent,
+                            padding: const EdgeInsets.all(8),
+                            children:  {
+                              0: buildSegment("Male"),
+                              1: buildSegment("Female"),
+                              2: buildSegment("Other")
+                            },
+                            onValueChanged: (groupValue){
+                              setState(() {
+                                this.groupValue = groupValue!;
+                              });
+                            }),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        const Divider(
+                          color: Colors.black,
                         ),
                         SizedBox(
-                          height: size.height*.05,
+                          height: size.height*.04,
+                        ),
+
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: SizedBox(
+                            width: 120,
+                            height: 40,
+                            child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.black87,
+                                ),
+                                onPressed: (){
+
+                                },
+                                child: const Text("Continue",
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontFamily: "Poppins",
+                                      fontWeight: FontWeight.w600
+                                  ),
+                                )),
+                          ),
                         ),
 
                       ],
                     )
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: SizedBox(
-                  width: size.width*.2,
-                  height: size.height/17,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Get.toNamed(HomePage.id);
-                    },
-                    child: const Text(
-                      "Continue",
-                      style: TextStyle(
-                        fontSize: 17.5,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                        primary: elevatedButtonColor
-                    ),
-                  ),
-                ),
-              ),
+
             ],
         ),
       ),
     );
   }
+  Widget buildSegment(String text)=>Text(
+      text,
+      style: const TextStyle(
+          color: Colors.black
+      )
+  );
 }

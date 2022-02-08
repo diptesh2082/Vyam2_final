@@ -117,62 +117,64 @@ class _OrderDetailsState extends State<OrderDetails> {
                                     ),
                                     Row(
                                       children: [
-                                        Text(
-                                          getOderDetails[widget.index].date,
-                                          style: GoogleFonts.poppins(
-                                              color: HexColor("A3A3A3"),
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 35.0),
-                                          child: Image.asset(
-                                            "assets/icons/Bookings-bx_bxs-direction-right.png",
-                                            height: 20,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        Container(
-                                          decoration: BoxDecoration(
-                                              color: HexColor("49C000"),
-                                              shape: BoxShape.circle),
-                                          width: 5,
-                                          height: 5,
+                                        Column(
+                                          children: [
+                                            Text(
+                                              getOderDetails[widget.index].date,
+                                              style: GoogleFonts.poppins(
+                                                  color: HexColor("A3A3A3"),
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                            Row(
+                                              children: [
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                      color: HexColor("49C000"),
+                                                      shape: BoxShape.circle),
+                                                  width: 5,
+                                                  height: 5,
+                                                ),
+                                                const SizedBox(
+                                                  width: 5,
+                                                ),
+                                                Text(
+                                                  "Confirmed",
+                                                  style: GoogleFonts.poppins(
+                                                      color: HexColor("3A3A3A"),
+                                                      fontSize: 10,
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
                                         ),
                                         const SizedBox(
                                           width: 5,
                                         ),
-                                        Row(
-                                          children: [
-                                            Text(
-                                              "Confirmed",
-                                              style: GoogleFonts.poppins(
-                                                  color: HexColor("3A3A3A"),
-                                                  fontSize: 10,
-                                                  fontWeight: FontWeight.w500),
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 30.0),
-                                              child: Column(
-                                                children: [
-                                                  Text(
-                                                    "Navigate",
-                                                    style: GoogleFonts.poppins(
-                                                        color:
-                                                            HexColor("49C000"),
-                                                        fontSize: 10,
-                                                        fontWeight:
-                                                            FontWeight.w500),
-                                                  ),
-                                                ],
+                                        Spacer(),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              right: 20.0),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Image.asset(
+                                                "assets/icons/Bookings-bx_bxs-direction-right.png",
+                                                height: 20,
                                               ),
-                                            )
-                                          ],
+                                              Text(
+                                                "Navigate",
+                                                style: GoogleFonts.poppins(
+                                                    color: HexColor("49C000"),
+                                                    fontSize: 10,
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ],
                                     ),

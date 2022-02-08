@@ -19,7 +19,7 @@ class ActiveEvent extends StatelessWidget {
 
   Future ActiveEventsList() async {
     events = activeEventItems;
-    await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(milliseconds: 500));
     if (events.isNotEmpty) {
       return events;
     }

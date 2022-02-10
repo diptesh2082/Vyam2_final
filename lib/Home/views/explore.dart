@@ -7,7 +7,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/cupertino.dart';
 import '../../controllers/gym_controller.dart';
 
-// String api="AIzaSyBdpLJQN_y-VtLZ2oLwp8OEE5SlR8cHHcQ";
+const String api="AIzaSyBdpLJQN_y-VtLZ2oLwp8OEE5SlR8cHHcQ";
 class Explore extends StatefulWidget {
   const Explore({Key? key}) : super(key: key);
 

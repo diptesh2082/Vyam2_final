@@ -4,6 +4,8 @@
         android:label="vyam_2_final"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+       <meta-data android:name="com.google.android.geo.API_KEY"
+           android:value="AIzaSyBdpLJQN_y-VtLZ2oLwp8OEE5SlR8cHHcQ"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -32,4 +34,5 @@
             android:value="2" />
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
+
 </manifest>

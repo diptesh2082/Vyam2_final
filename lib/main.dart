@@ -7,6 +7,7 @@ import 'package:vyam_2_final/authintication/regitration_from.dart';
 import 'package:vyam_2_final/global_snackbar.dart';
 
 import 'Home/home_page.dart';
+import 'Onbording_pages/onboarding1.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: Themes().lightTheme,
 
-      home: HomePage(),
+      home: Onboarding1(),
       // initialRoute: ,
       getPages: [
         GetPage(name: HomePage.id, page: () => HomePage()),

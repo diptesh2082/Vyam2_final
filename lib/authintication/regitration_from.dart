@@ -223,7 +223,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                   primary: Colors.black87,
                                 ),
                                 onPressed: (){
-
+                                      Get.toNamed(HomePage.id);
                                 },
                                 child: const Text("Continue",
                                   style: TextStyle(

@@ -58,8 +58,7 @@ class _Screen1State extends State<Screen1> {
             color: Colors.black,
           ),
           onPressed: () {
-            // Get.back();
-            Navigator.pop(context);
+            Get.back();
           },
         ),
         title: const Text(""

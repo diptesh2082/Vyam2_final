@@ -16,6 +16,15 @@ class ProfilePart extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.grey[100],
         centerTitle: true,
+        // leading: IconButton(
+        //   icon: const Icon(
+        //     Icons.arrow_back_ios_new,
+        //     color: Colors.black,
+        //   ),
+        //   onPressed: () {
+        //     Get.back();
+        //   },
+        // ),
         title: const Text("Profile",
         style: TextStyle(
           fontFamily: "Poppins",

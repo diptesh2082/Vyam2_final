@@ -43,6 +43,11 @@ dependencies:
   percent_indicator: ^4.0.0
   firebase_core: ^1.12.0
   cloud_firestore: ^3.1.7
+  flutter_screenutil: ^5.1.1
+  #carousel_pro: ^1.0.0
+  carousel_slider: ^4.0.0
+  auto_size_text: ^3.0.0
+  scroll_snap_list: ^0.8.4
 
 
 

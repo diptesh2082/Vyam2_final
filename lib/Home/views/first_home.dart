@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:vyam_2_final/Home/views/product_gyms.dart';
+import 'package:vyam_2_final/api/api.dart';
 import 'package:vyam_2_final/controllers/home_controller.dart';
 
 import '../../Notifications/notification.dart';
@@ -26,8 +27,12 @@ class _FirstHomeState extends State<FirstHome> {
     {"gymName": "Transformer Gym - Barakar", "dayleft": "15"},
   ];
 
+  UserDetails userDetails = UserDetails();
+  NotificationApi notificationApi = NotificationApi();
+
   @override
   void initState() {
+    userDetails.getData();
     int getDays = int.parse(daysLeft[0]["dayleft"]);
     getDays = 28 - getDays;
     finaldaysLeft = getDays / 28;

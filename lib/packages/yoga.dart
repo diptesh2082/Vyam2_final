@@ -67,7 +67,7 @@ class YogaList extends StatelessWidget {
                                   children: [
                                     Column(
                                       crossAxisAlignment:
-                                      CrossAxisAlignment.end,
+                                          CrossAxisAlignment.end,
                                       children: [
                                         Container(
                                           margin: const EdgeInsets.all(5.0),
@@ -78,7 +78,7 @@ class YogaList extends StatelessWidget {
                                               right: 5),
                                           decoration: BoxDecoration(
                                               borderRadius:
-                                              BorderRadius.circular(5),
+                                                  BorderRadius.circular(5),
                                               border: Border.all(
                                                   color: HexColor("49C000"))),
                                           child: Text(

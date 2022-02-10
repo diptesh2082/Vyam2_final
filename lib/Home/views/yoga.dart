@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-
 class MyYoga extends StatefulWidget {
   const MyYoga({Key? key}) : super(key: key);
 
@@ -10,10 +9,9 @@ class MyYoga extends StatefulWidget {
 }
 
 class _MyYogaState extends State<MyYoga> {
-  final appBarColor =Colors.grey[300];
+  final appBarColor = Colors.grey[300];
 
   var groupValue = 0;
-
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +30,9 @@ class _MyYogaState extends State<MyYoga> {
             Navigator.pop(context);
           },
         ),
-        title: const Text(""
-            "Zumba",
+        title: const Text(
+          ""
+          "Zumba",
           style: TextStyle(
             color: Colors.black,
           ),
@@ -48,13 +47,13 @@ class _MyYogaState extends State<MyYoga> {
                   groupValue: groupValue,
                   thumbColor: Colors.black38,
                   padding: const EdgeInsets.all(8),
-                  children:  {
+                  children: {
                     0: buildSegment("All"),
                     1: buildSegment("Male"),
                     2: buildSegment("Female"),
                     3: buildSegment("Unisex")
                   },
-                  onValueChanged: (groupValue){
+                  onValueChanged: (groupValue) {
                     setState(() {
                       this.groupValue = groupValue!;
                     });
@@ -65,11 +64,11 @@ class _MyYogaState extends State<MyYoga> {
               Align(
                 alignment: Alignment.center,
                 child: SizedBox(
-                  height: size.height*.25,
-                  width: size.width*.94,
+                  height: size.height * .25,
+                  width: size.width * .94,
                   child: ListView.builder(
                     itemCount: 1,
-                    itemBuilder: (context,int index){
+                    itemBuilder: (context, int index) {
                       return Stack(
                         children: [
                           ClipRRect(
@@ -77,18 +76,19 @@ class _MyYogaState extends State<MyYoga> {
                             child: Image.asset(
                               'assets/photos/yoga 1.jpg',
                               fit: BoxFit.cover,
-                              height: size.height*.25,
-                              width: size.width*.94,
+                              height: size.height * .25,
+                              width: size.width * .94,
                             ),
                           ),
                           Positioned(
-                            bottom: size.height*.009,
+                            bottom: size.height * .009,
                             left: 5,
                             child: Container(
-                              height: size.height*.078,
-                              width: size.width*.45,
+                              height: size.height * .078,
+                              width: size.width * .45,
                               color: Colors.black26,
-                              padding: const EdgeInsets.only(left: 8, bottom: 10),
+                              padding:
+                                  const EdgeInsets.only(left: 8, bottom: 10),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -119,13 +119,14 @@ class _MyYogaState extends State<MyYoga> {
                           ),
                           Positioned(
                             right: 5,
-                            bottom: size.height*.008,
+                            bottom: size.height * .008,
                             child: Container(
                               color: Colors.black26,
                               alignment: Alignment.bottomRight,
-                              height: size.height*.08,
-                              width: size.width*.22,
-                              padding: const EdgeInsets.only(right: 8, bottom: 10),
+                              height: size.height * .08,
+                              width: size.width * .22,
+                              padding:
+                                  const EdgeInsets.only(right: 8, bottom: 10),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -202,10 +203,6 @@ class _MyYogaState extends State<MyYoga> {
     );
   }
 
-  Widget buildSegment(String text)=>Text(
-      text,
-      style: const TextStyle(
-          color: Colors.black
-      )
-  );
+  Widget buildSegment(String text) =>
+      Text(text, style: const TextStyle(color: Colors.black));
 }

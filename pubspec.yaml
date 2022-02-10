@@ -46,6 +46,8 @@ dependencies:
   auto_size_text: ^3.0.0
   flutter_screenutil: ^5.1.1
   google_maps_flutter: ^2.1.1
+  carousel_slider: ^4.0.0
+  scroll_snap_list: ^0.8.4
 
 
 

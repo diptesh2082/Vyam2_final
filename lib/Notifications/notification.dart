@@ -1,12 +1,7 @@
-import 'dart:math';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:vyam_2_final/api/api.dart';
-import 'package:vyam_2_final/controllers/gym_detail.dart';
 // import 'package:vyambooking/List/list.dart';
 
 class NotificationDetails extends StatefulWidget {

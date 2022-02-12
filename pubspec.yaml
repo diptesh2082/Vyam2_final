@@ -48,6 +48,8 @@ dependencies:
   google_maps_flutter: ^2.1.1
   carousel_slider: ^4.0.0
   scroll_snap_list: ^0.8.4
+  geolocator: ^8.1.1
+  geocoding: ^2.0.2
 
 
 

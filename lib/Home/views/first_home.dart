@@ -2,11 +2,14 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:vyam_2_final/Home/views/product_gyms.dart';
 import 'package:vyam_2_final/controllers/home_controller.dart';
+import 'package:vyam_2_final/controllers/location_controller.dart';
 
 import '../../Notifications/notification.dart';
 import 'gyms.dart';
@@ -22,17 +25,19 @@ class _FirstHomeState extends State<FirstHome> {
   var finaldaysLeft;
   var getPercentage;
   var progressColor;
+  // var location = Get.arguments;
   List daysLeft = [
     {"gymName": "Transformer Gym - Barakar", "dayleft": "15"},
   ];
 
   @override
   void initState() {
+
     int getDays = int.parse(daysLeft[0]["dayleft"]);
     getDays = 28 - getDays;
     finaldaysLeft = getDays / 28;
     getPercentage = finaldaysLeft * 100;
-
+    // locationController.YourLocation(location);
     if (getPercentage >= 90) {
       progressColor = Colors.red;
     }
@@ -46,17 +51,54 @@ class _FirstHomeState extends State<FirstHome> {
       progressColor = Colors.yellow;
     }
     super.initState();
+
   }
 
   final backgroundColor = Colors.grey[200];
 
   final appBarColor = Colors.grey[300];
-
+  // final LocationController yourLocation = Get.find();
   final HomeController controller = Get.put(HomeController());
+  final LocationController locationController = Get.put(LocationController());
 
+  String address = "Tap here To search your location";
+  Future<Position> determinePosition() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      await Geolocator.openLocationSettings();
+      return Future.error('Location services are disabled.');
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+
+        return Future.error('Location permissions are denied');
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      // Permissions are denied forever, handle appropriately.
+      return Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.');
+    }
+
+    return await Geolocator.getCurrentPosition();
+  }
+  Future<void> GetAddressFromLatLong(Position position) async {
+    List<Placemark> placemark = await placemarkFromCoordinates(position.latitude, position.longitude);
+    Placemark place = placemark[0];
+    address = "${place.name},${place.street},${place.postalCode}";
+  }
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
@@ -81,22 +123,30 @@ class _FirstHomeState extends State<FirstHome> {
                   CupertinoIcons.location,
                   color: Colors.black,
                 ),
-                onPressed: () {
-                  Get.back();
+                onPressed: () async {
+                  // Get.back();
+                  Position position = await determinePosition();
+                  GetAddressFromLatLong(position);
+                  setState(() {
+                    address;
+                  });
                 },
               ),
               SizedBox(
-                width: size.width * .4,
-                child: Text(
-                  "2972 Westheimer Rd, Illinois 85486 ",
-                  textAlign: TextAlign.left,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: size.height * .018,
-                  ),
-                ),
+                width: size.width * .55,
+                child:  Text(
+                        '${address}',
+                        textAlign: TextAlign.left,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontFamily: "Poppins",
+                          fontSize: 13,
+                          fontWeight: FontWeight.w500
+                        ),
+                      ),
+
               ),
             ],
           ),

@@ -19,29 +19,17 @@ class UserDetails {
 
 class NotificationApi {
   String number = "8859451134";
-  List couponList = [];
   List remainderList = [];
 
   Future getCouponNotificationData() async {
-    var couponFirestore = FirebaseFirestore.instance
-        .collection('notification')
-        .doc(number)
-        .collection("notificationtype")
-        .doc("coupon")
-        .collection("detail");
     var remainderFirestore = FirebaseFirestore.instance
-        .collection('notification')
+        .collection('notifications')
         .doc(number)
         .collection("notificationtype")
         .doc("remainder")
         .collection("detail");
 
     try {
-      await couponFirestore.get().then((value) {
-        for (var result in value.docs) {
-          couponList.add(result.data());
-        }
-      });
       await remainderFirestore.get().then((value) {
         for (var result in value.docs) {
           remainderList.add(result.data());
@@ -50,6 +38,26 @@ class NotificationApi {
     } catch (e) {
       return null;
     }
-    return couponList + remainderList;
+    return remainderList;
+  }
+}
+
+class CouponApi {
+  String number = "8859451134";
+  List couponList = [];
+  Future getCouponData() async {
+    var couponFirestore = FirebaseFirestore.instance.collection('coupon');
+
+    try {
+      await couponFirestore.get().then((value) {
+        for (var result in value.docs) {
+          couponList.add(result.data());
+        }
+      });
+    } catch (e) {
+      return null;
+    }
+
+    return couponList;
   }
 }

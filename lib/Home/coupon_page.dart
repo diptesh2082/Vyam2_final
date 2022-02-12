@@ -1,28 +1,22 @@
-import 'dart:math';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:vyam_2_final/api/api.dart';
-import 'package:vyam_2_final/controllers/gym_detail.dart';
 // import 'package:vyambooking/List/list.dart';
 
-class NotificationDetails extends StatefulWidget {
-  NotificationDetails({
+class CouponDetails extends StatefulWidget {
+  CouponDetails({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<NotificationDetails> createState() => _NotificationDetailsState();
+  State<CouponDetails> createState() => _CouponDetailsState();
 }
 
-class _NotificationDetailsState extends State<NotificationDetails> {
-  List events = [];
-  List notificationList = [];
+class _CouponDetailsState extends State<CouponDetails> {
+  List couponList = [];
 
-  NotificationApi notificationApi = NotificationApi();
+  CouponApi couponApi = CouponApi();
 
   @override
   void initState() {
@@ -48,7 +42,7 @@ class _NotificationDetailsState extends State<NotificationDetails> {
         backgroundColor: Colors.transparent,
         centerTitle: true,
         title: Text(
-          "Notifications",
+          "Coupon & Offers",
           style: GoogleFonts.poppins(
               color: HexColor("3A3A3A"),
               fontSize: 18,
@@ -56,7 +50,7 @@ class _NotificationDetailsState extends State<NotificationDetails> {
         ),
       ),
       body: FutureBuilder(
-          future: notificationApi.getCouponNotificationData(),
+          future: couponApi.getCouponData(),
           builder: (_, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
@@ -65,8 +59,10 @@ class _NotificationDetailsState extends State<NotificationDetails> {
               return Text(snapshot.error.toString());
             }
             if (snapshot.connectionState == ConnectionState.done) {
-              notificationList = snapshot.data as List;
-              if (notificationList.isEmpty) {
+              couponList = snapshot.data as List;
+              print(couponList.length);
+
+              if (couponList.isEmpty) {
                 return Center(
                   child: Image.asset(
                     "assets/Illustrations/notification empty.png",
@@ -82,7 +78,7 @@ class _NotificationDetailsState extends State<NotificationDetails> {
                         height: _height * 0.7,
                         child: ListView.builder(
                             shrinkWrap: true,
-                            itemCount: notificationList.length,
+                            itemCount: couponList.length,
                             itemBuilder: (context, index) {
                               return Padding(
                                 padding: const EdgeInsets.all(8.0),
@@ -113,24 +109,47 @@ class _NotificationDetailsState extends State<NotificationDetails> {
                                               children: [
                                                 Row(
                                                   children: [
-                                                    const Icon(
-                                                      Icons.warning_amber,
-                                                      color: Colors.red,
-                                                    ),
+                                                    Image.asset(
+                                                        "assets/icons/discount.png"),
                                                     const SizedBox(
                                                       width: 20,
                                                     ),
-                                                    Text(
-                                                      notificationList[index]
-                                                          ['detail'],
-                                                      style:
-                                                          GoogleFonts.poppins(
-                                                              color: HexColor(
-                                                                  "3A3A3A"),
-                                                              fontSize: 14,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600),
+                                                    Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          couponList[index]
+                                                                  ['title']
+                                                              .toUpperCase(),
+                                                          style: GoogleFonts
+                                                              .poppins(
+                                                                  color: HexColor(
+                                                                      "3A3A3A"),
+                                                                  fontSize: 14,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 5,
+                                                        ),
+                                                        Text(
+                                                          "Code : " +
+                                                              couponList[index]
+                                                                      ['code']
+                                                                  .toUpperCase(),
+                                                          style: GoogleFonts
+                                                              .poppins(
+                                                                  color: HexColor(
+                                                                      "3A3A3A"),
+                                                                  fontSize: 12,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600),
+                                                        ),
+                                                      ],
                                                     ),
                                                   ],
                                                 ),
@@ -144,22 +163,6 @@ class _NotificationDetailsState extends State<NotificationDetails> {
                                 ),
                               );
                             }),
-                      ),
-                      Container(
-                        width: _width * 0.9,
-                        height: 50,
-                        decoration: BoxDecoration(
-                            color: HexColor("292F3D"),
-                            borderRadius: BorderRadius.circular(8)),
-                        child: Center(
-                          child: Text(
-                            "Clear all",
-                            style: GoogleFonts.poppins(
-                                color: HexColor("FFFFFF"),
-                                fontSize: 16,
-                                fontWeight: FontWeight.w700),
-                          ),
-                        ),
                       ),
                     ],
                   ),

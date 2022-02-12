@@ -5,10 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:vyam_2_final/Home/coupon_page.dart';
 import 'package:vyam_2_final/Home/views/product_gyms.dart';
 import 'package:vyam_2_final/api/api.dart';
 import 'package:vyam_2_final/controllers/home_controller.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../Notifications/notification.dart';
 import 'gyms.dart';
 
@@ -33,6 +34,7 @@ class _FirstHomeState extends State<FirstHome> {
   @override
   void initState() {
     userDetails.getData();
+
     int getDays = int.parse(daysLeft[0]["dayleft"]);
     getDays = 28 - getDays;
     finaldaysLeft = getDays / 28;
@@ -144,25 +146,30 @@ class _FirstHomeState extends State<FirstHome> {
               const SizedBox(
                 height: 15,
               ),
-              SizedBox(
-                height: size.height * .18,
-                child: ListView.builder(
-                  // controller: _controller.,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: controller.boards.length,
-                  itemBuilder: (context, int index) {
-                    return SizedBox(
-                      height: 120,
-                      child: Row(
-                        children: [
-                          Image.asset(controller.boards[index].imageAssets),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                        ],
-                      ),
-                    );
-                  },
+              InkWell(
+                onTap: () {
+                  Get.to(CouponDetails());
+                },
+                child: SizedBox(
+                  height: size.height * .18,
+                  child: ListView.builder(
+                    // controller: _controller.,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: controller.boards.length,
+                    itemBuilder: (context, int index) {
+                      return SizedBox(
+                        height: 120,
+                        child: Row(
+                          children: [
+                            Image.asset(controller.boards[index].imageAssets),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ),
               const SizedBox(

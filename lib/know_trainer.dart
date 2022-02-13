@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:scroll_snap_list/scroll_snap_list.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:vyam_2_final/Home/gym_detail/gym_details.dart';
+
+import 'Home/bookings/gym_details.dart';
 
 class TrainerScreen extends StatelessWidget {
   @override

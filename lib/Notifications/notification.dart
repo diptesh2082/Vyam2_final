@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -5,7 +6,7 @@ import 'package:vyam_2_final/api/api.dart';
 // import 'package:vyambooking/List/list.dart';
 
 class NotificationDetails extends StatefulWidget {
-  NotificationDetails({
+  const NotificationDetails({
     Key? key,
   }) : super(key: key);
 
@@ -50,97 +51,90 @@ class _NotificationDetailsState extends State<NotificationDetails> {
               fontWeight: FontWeight.w600),
         ),
       ),
-      body: FutureBuilder(
-          future: notificationApi.getCouponNotificationData(),
-          builder: (_, snapshot) {
+      body: StreamBuilder<QuerySnapshot>(
+          stream: notificationApi.getnotification,
+          builder: (_, AsyncSnapshot snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
             }
             if (snapshot.hasError) {
               return Text(snapshot.error.toString());
             }
-            if (snapshot.connectionState == ConnectionState.done) {
-              notificationList = snapshot.data as List;
-              if (notificationList.isEmpty) {
-                return Center(
-                  child: Image.asset(
-                    "assets/Illustrations/notification empty.png",
-                  ),
-                );
-              }
-              return SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 30.0),
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: _height * 0.7,
-                        child: ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: notificationList.length,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                padding: const EdgeInsets.all(8.0),
+            final data = snapshot.requireData;
+            print(data.size);
+
+            if (data.size == 0) {
+              return Center(
+                child: Image.asset(
+                  "assets/Illustrations/notification empty.png",
+                ),
+              );
+            }
+
+            return SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 30.0),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: _height * 0.7,
+                      child: ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: data.size,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Card(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8)),
+                                elevation: 8,
+                                color: Colors.transparent,
                                 child: Container(
-                                  child: Card(
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(8)),
-                                    elevation: 8,
-                                    color: Colors.transparent,
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(8)),
-                                      width: _width * 0.9,
-                                      child: Row(
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                top: 22.0,
-                                                left: 18,
-                                                bottom: 22),
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Row(
-                                                  children: [
-                                                    const Icon(
-                                                      Icons.warning_amber,
-                                                      color: Colors.red,
-                                                    ),
-                                                    const SizedBox(
-                                                      width: 20,
-                                                    ),
-                                                    Text(
-                                                      notificationList[index]
-                                                          ['detail'],
-                                                      style:
-                                                          GoogleFonts.poppins(
-                                                              color: HexColor(
-                                                                  "3A3A3A"),
-                                                              fontSize: 14,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(8)),
+                                  width: _width * 0.9,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 22.0, left: 18, bottom: 22),
+                                    child: Row(
+                                      children: [
+                                        if (data.docs[index]['type']
+                                            .contains("remainder"))
+                                          const Icon(
+                                            Icons.warning_amber,
+                                            color: Colors.red,
                                           ),
-                                        ],
-                                      ),
+                                        if (data.docs[index]['type']
+                                            .contains("coupon"))
+                                          Image.asset(
+                                              "assets/icons/discount.png"),
+                                        const SizedBox(
+                                          width: 20,
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            data.docs[index]['msg'],
+                                            maxLines: 3,
+                                            style: GoogleFonts.poppins(
+                                                color: HexColor("3A3A3A"),
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w600),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ),
-                              );
-                            }),
-                      ),
-                      Container(
+                              ),
+                            );
+                          }),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        notificationApi.clearNotificationList();
+                      },
+                      child: Container(
                         width: _width * 0.9,
                         height: 50,
                         decoration: BoxDecoration(
@@ -156,14 +150,9 @@ class _NotificationDetailsState extends State<NotificationDetails> {
                           ),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              );
-            }
-            return Center(
-              child: Image.asset(
-                "assets/Illustrations/notification empty.png",
               ),
             );
           }),

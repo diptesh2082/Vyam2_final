@@ -1,7 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+var number;
+
+getNumber() async {
+  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  var getNumber = sharedPreferences.getString("number");
+  number = getNumber.toString();
+}
 
 class UserDetails {
-  String number = "8859451134";
   final collectionRef = FirebaseFirestore.instance.collection('user_details');
   List userData = [];
 
@@ -18,27 +26,27 @@ class UserDetails {
 }
 
 class NotificationApi {
-  String number = "8859451134";
-  List remainderList = [];
+  final Stream<QuerySnapshot> getnotification = FirebaseFirestore.instance
+      .collection('user_details')
+      .doc(number)
+      .collection("notification")
+      .snapshots();
 
-  Future getCouponNotificationData() async {
+  Future clearNotificationList() async {
     var remainderFirestore = FirebaseFirestore.instance
-        .collection('notifications')
+        .collection('user_details')
         .doc(number)
-        .collection("notificationtype")
-        .doc("remainder")
-        .collection("detail");
+        .collection("notification");
 
     try {
       await remainderFirestore.get().then((value) {
-        for (var result in value.docs) {
-          remainderList.add(result.data());
+        for (DocumentSnapshot ds in value.docs) {
+          ds.reference.delete();
         }
       });
     } catch (e) {
       return null;
     }
-    return remainderList;
   }
 }
 

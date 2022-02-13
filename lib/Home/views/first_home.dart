@@ -7,7 +7,9 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:vyam_2_final/Home/coupon_page.dart';
 import 'package:vyam_2_final/Home/views/product_gyms.dart';
+import 'package:vyam_2_final/api/api.dart';
 import 'package:vyam_2_final/controllers/home_controller.dart';
 import 'package:vyam_2_final/controllers/location_controller.dart';
 
@@ -30,8 +32,12 @@ class _FirstHomeState extends State<FirstHome> {
     {"gymName": "Transformer Gym - Barakar", "dayleft": "15"},
   ];
 
+  UserDetails userDetails = UserDetails();
+  NotificationApi notificationApi = NotificationApi();
+
   @override
   void initState() {
+    userDetails.getData();
 
     int getDays = int.parse(daysLeft[0]["dayleft"]);
     getDays = 28 - getDays;
@@ -51,7 +57,6 @@ class _FirstHomeState extends State<FirstHome> {
       progressColor = Colors.yellow;
     }
     super.initState();
-
   }
 
   final backgroundColor = Colors.grey[200];
@@ -61,11 +66,9 @@ class _FirstHomeState extends State<FirstHome> {
   final HomeController controller = Get.put(HomeController());
   final LocationController locationController = Get.put(LocationController());
 
-
   Future<Position> _determinePosition() async {
     bool serviceEnabled;
     LocationPermission permission;
-
 
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
@@ -77,7 +80,6 @@ class _FirstHomeState extends State<FirstHome> {
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-
         return Future.error('Location permissions are denied');
       }
     }
@@ -90,12 +92,15 @@ class _FirstHomeState extends State<FirstHome> {
 
     return await Geolocator.getCurrentPosition();
   }
+
   String address = "Tap here To search your location";
   Future<void> GetAddressFromLatLong(Position position) async {
-    List<Placemark> placemark = await placemarkFromCoordinates(position.latitude, position.longitude);
+    List<Placemark> placemark =
+        await placemarkFromCoordinates(position.latitude, position.longitude);
     Placemark place = placemark[0];
     address = "${place.name},${place.street},${place.postalCode}";
   }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -129,27 +134,24 @@ class _FirstHomeState extends State<FirstHome> {
                   Position position = await _determinePosition();
                   GetAddressFromLatLong(position);
                   // print(address);
-                  setState(()  {
+                  setState(() {
                     address;
-                  }
-                  );
+                  });
                 },
               ),
               SizedBox(
                 width: size.width * .55,
-                child:  Text(
-                        address,
-                        textAlign: TextAlign.left,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontFamily: "Poppins",
-                          fontSize: 13,
-                          fontWeight: FontWeight.w500
-                        ),
-                      ),
-
+                child: Text(
+                  address,
+                  textAlign: TextAlign.left,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                  style: const TextStyle(
+                      color: Colors.black,
+                      fontFamily: "Poppins",
+                      fontSize: 13,
+                      fontWeight: FontWeight.w500),
+                ),
               ),
             ],
           ),
@@ -192,25 +194,30 @@ class _FirstHomeState extends State<FirstHome> {
               const SizedBox(
                 height: 15,
               ),
-              SizedBox(
-                height: size.height * .18,
-                child: ListView.builder(
-                  // controller: _controller.,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: controller.boards.length,
-                  itemBuilder: (context, int index) {
-                    return SizedBox(
-                      height: 120,
-                      child: Row(
-                        children: [
-                          Image.asset(controller.boards[index].imageAssets),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                        ],
-                      ),
-                    );
-                  },
+              InkWell(
+                onTap: () {
+                  Get.to(CouponDetails());
+                },
+                child: SizedBox(
+                  height: size.height * .18,
+                  child: ListView.builder(
+                    // controller: _controller.,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: controller.boards.length,
+                    itemBuilder: (context, int index) {
+                      return SizedBox(
+                        height: 120,
+                        child: Row(
+                          children: [
+                            Image.asset(controller.boards[index].imageAssets),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ),
               const SizedBox(

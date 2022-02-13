@@ -50,6 +50,7 @@ dependencies:
   scroll_snap_list: ^0.8.4
   geolocator: ^8.1.1
   geocoding: ^2.0.2
+  firebase_storage: ^10.2.7
 
 
 

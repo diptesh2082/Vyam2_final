@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -31,7 +32,7 @@ class NotificationDetails extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(
-            Icons.arrow_back,
+            CupertinoIcons.back,
             color: HexColor("3A3A3A"),
           ),
           onPressed: () {

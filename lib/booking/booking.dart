@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -34,8 +35,10 @@ class _BookingDetailsState extends State<BookingDetails> {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
+
         backgroundColor: HexColor("F5F5F5"),
         appBar: AppBar(
+
           bottom: TabBar(
               indicatorColor: HexColor("F5F5F5"),
               onTap: (index) {
@@ -116,10 +119,12 @@ class _BookingDetailsState extends State<BookingDetails> {
                     )),
               ]),
           toolbarHeight: 80,
-          leading: Icon(
-            Icons.arrow_back,
-            color: HexColor("3A3A3A"),
-          ),
+          // leading: Icon(
+          //     CupertinoIcons.back,
+          //     color: HexColor("3A3A3A"),
+          //   ),
+          //
+
           elevation: 0,
           backgroundColor: Colors.transparent,
           centerTitle: true,

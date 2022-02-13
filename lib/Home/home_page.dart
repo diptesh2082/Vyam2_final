@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:vyam_2_final/Home/profile/profile_page.dart';
+import 'package:vyam_2_final/Home/views/explore.dart';
 import 'package:vyam_2_final/Home/views/first_home.dart';
 import 'package:vyam_2_final/booking/booking.dart';
 import 'package:vyam_2_final/controllers/home_controller.dart';
@@ -52,10 +53,7 @@ class _HomePageState extends State<HomePage> {
       FirstHome(),
       const BookingDetails(),
 
-      Scaffold(
-        backgroundColor: Colors.blueGrey,
-        body: Container(),
-      ),
+      const Explore(),
       const ProfilePart(),
     ];
   }
@@ -65,7 +63,7 @@ class _HomePageState extends State<HomePage> {
   final appBarColor = Colors.grey[300];
   final HomeController controller = Get.put(HomeController());
   final screens = [
-    FirstHome(),
+    const FirstHome(),
     const BookingDetails(),
     const BookingDetails(),
     const BookingDetails(),

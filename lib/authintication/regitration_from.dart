@@ -1,10 +1,13 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:vyam_2_final/Home/home_page.dart';
 import 'package:vyam_2_final/colors/color.dart';
+import 'package:vyam_2_final/controllers/location_controller.dart';
 
 
 class RegistrationPage extends StatefulWidget {
@@ -17,6 +20,10 @@ class RegistrationPage extends StatefulWidget {
 
 class _RegistrationPageState extends State<RegistrationPage> {
   var groupValue = 0;
+
+  // String address = "";
+  // String location = "Search";
+  // final LocationController locationController = Get.put(LocationController());
   // File? image;
   // Future pickImage(ImageSource imageType) async {
   //   try{
@@ -32,6 +39,40 @@ class _RegistrationPageState extends State<RegistrationPage> {
   //   }
   //
   // }
+  // Future<Position> _determinePosition() async {
+  //   bool serviceEnabled;
+  //   LocationPermission permission;
+  //
+  //
+  //   serviceEnabled = await Geolocator.isLocationServiceEnabled();
+  //   if (!serviceEnabled) {
+  //     await Geolocator.openLocationSettings();
+  //     return Future.error('Location services are disabled.');
+  //   }
+  //
+  //   permission = await Geolocator.checkPermission();
+  //   if (permission == LocationPermission.denied) {
+  //     permission = await Geolocator.requestPermission();
+  //     if (permission == LocationPermission.denied) {
+  //
+  //       return Future.error('Location permissions are denied');
+  //     }
+  //   }
+  //
+  //   if (permission == LocationPermission.deniedForever) {
+  //     // Permissions are denied forever, handle appropriately.
+  //     return Future.error(
+  //         'Location permissions are permanently denied, we cannot request permissions.');
+  //   }
+  //
+  //   return await Geolocator.getCurrentPosition();
+  // }
+  // Future<void> GetAddressFromLatLong(Position position) async {
+  //   List<Placemark> placemark = await placemarkFromCoordinates(position.latitude, position.longitude);
+  //   Placemark place = placemark[0];
+  //   address = "${place.name},${place.street},${place.postalCode}";
+  // }
+  // final LocationController yourLocation = Get.put(LocationController());
 
   @override
   Widget build(BuildContext context) {
@@ -222,8 +263,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                 style: ElevatedButton.styleFrom(
                                   primary: Colors.black87,
                                 ),
-                                onPressed: (){
-
+                                onPressed: () async {
+                                  // print(address);
+                                      Get.toNamed(HomePage.id
+                                      );
                                 },
                                 child: const Text("Continue",
                                   style: TextStyle(

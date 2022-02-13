@@ -61,8 +61,8 @@ class _FirstHomeState extends State<FirstHome> {
   final HomeController controller = Get.put(HomeController());
   final LocationController locationController = Get.put(LocationController());
 
-  String address = "Tap here To search your location";
-  Future<Position> determinePosition() async {
+
+  Future<Position> _determinePosition() async {
     bool serviceEnabled;
     LocationPermission permission;
 
@@ -90,6 +90,7 @@ class _FirstHomeState extends State<FirstHome> {
 
     return await Geolocator.getCurrentPosition();
   }
+  String address = "Tap here To search your location";
   Future<void> GetAddressFromLatLong(Position position) async {
     List<Placemark> placemark = await placemarkFromCoordinates(position.latitude, position.longitude);
     Placemark place = placemark[0];
@@ -125,9 +126,9 @@ class _FirstHomeState extends State<FirstHome> {
                 ),
                 onPressed: () async {
                   // Get.back();
-                  Position position = await determinePosition();
+                  Position position = await _determinePosition();
                   GetAddressFromLatLong(position);
-                  print(address);
+                  // print(address);
                   setState(()  {
                     address;
                   }

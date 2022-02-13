@@ -1,21 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:vyam_2_final/Home/profile/faq.dart';
 import 'package:vyam_2_final/Home/profile/profile.dart';
 import 'package:vyam_2_final/authintication/regitration_from.dart';
 
 class ProfilePart extends StatelessWidget {
   const ProfilePart({Key? key}) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
-    Size size =MediaQuery.of(context).size;
+    Size size = MediaQuery.of(context).size;
     // final FirebaseAuth _auth =FirebaseAuth.instance;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey[100],
         centerTitle: true,
+
         // leading: IconButton(
         //   icon: const Icon(
         //     Icons.arrow_back_ios_new,
@@ -32,7 +33,8 @@ class ProfilePart extends StatelessWidget {
           fontWeight: FontWeight.w500,
           color: Colors.black
         ),
-        ),
+
+      ),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -44,7 +46,7 @@ class ProfilePart extends StatelessWidget {
                 child: Container(
                   height: 200,
                   decoration: const BoxDecoration(
-                      color: Colors.white,
+                    color: Colors.white,
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -53,7 +55,7 @@ class ProfilePart extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: EdgeInsets.only(left: size.width*.01),
+                            padding: EdgeInsets.only(left: size.width * .01),
                             child: Stack(
                               children: [
                                 Align(
@@ -65,18 +67,17 @@ class ProfilePart extends StatelessWidget {
                                     ),
                                     height: 115,
                                     width: 115,
-
                                   ),
                                 ),
                                 Positioned(
                                   child: Align(
                                     alignment: Alignment.center,
                                     child: CircleAvatar(
-                                        radius: size.width/7,
+                                        radius: size.width / 7,
                                         backgroundColor: Colors.yellowAccent,
                                         child: IconButton(
                                           iconSize: 100,
-                                          onPressed: (){
+                                          onPressed: () {
                                             // pickImage(ImageSource.gallery);
                                           },
                                           icon: const Icon(
@@ -84,8 +85,7 @@ class ProfilePart extends StatelessWidget {
                                             size: 70,
                                             color: Colors.black87,
                                           ),
-                                        )
-                                    ),
+                                        )),
                                   ),
                                 ),
                               ],
@@ -98,11 +98,10 @@ class ProfilePart extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: const [
                               Text(
-                                  "Jessica James",
+                                "Jessica James",
                                 style: TextStyle(
-                                  fontFamily: "Poppins",
-                                  fontWeight: FontWeight.w600
-                                ),
+                                    fontFamily: "Poppins",
+                                    fontWeight: FontWeight.w600),
                               ),
                               Text(
                                 "alma.lawson@example.com",
@@ -110,8 +109,7 @@ class ProfilePart extends StatelessWidget {
                                 maxLines: 1,
                                 style: TextStyle(
                                     fontFamily: "Poppins",
-                                    fontWeight: FontWeight.w400
-                                ),
+                                    fontWeight: FontWeight.w400),
                               ),
                               Text(
                                 "0091009835",
@@ -119,25 +117,22 @@ class ProfilePart extends StatelessWidget {
                                 maxLines: 1,
                                 style: TextStyle(
                                     fontFamily: "Poppins",
-                                    fontWeight: FontWeight.w400
-                                ),
+                                    fontWeight: FontWeight.w400),
                               ),
                             ],
                           ),
                           Padding(
                             padding: const EdgeInsets.only(bottom: 50.0),
                             child: IconButton(
-                                onPressed: (){
-                                  Get.to(()=>Profile());
+                                onPressed: () {
+                                  Get.to(() => Profile());
                                 },
-                                icon: const Icon(Icons.edit)
-                            ),
+                                icon: const Icon(Icons.edit)),
                           )
                         ],
                       ),
                     ],
                   ),
-
                 ),
               ),
               const Divider(
@@ -153,10 +148,7 @@ class ProfilePart extends StatelessWidget {
                 ),
                 title: const Text(
                   "Contact Us",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontFamily: "Poppins"
-                  ),
+                  style: TextStyle(fontSize: 18, fontFamily: "Poppins"),
                 ),
               ),
               const Divider(
@@ -172,10 +164,7 @@ class ProfilePart extends StatelessWidget {
                 ),
                 title: const Text(
                   "About Us",
-                  style: TextStyle(
-                    fontSize: 18,
-                      fontFamily: "Poppins"
-                  ),
+                  style: TextStyle(fontSize: 18, fontFamily: "Poppins"),
                 ),
               ),
               const Divider(
@@ -187,13 +176,11 @@ class ProfilePart extends StatelessWidget {
                 },
                 leading: const Icon(
                   CupertinoIcons.news,
-                  color: Colors.black54,),
+                  color: Colors.black54,
+                ),
                 title: const Text(
                   "Terms & Condition",
-                  style: TextStyle(
-                    fontSize: 18,
-                      fontFamily: "Poppins"
-                  ),
+                  style: TextStyle(fontSize: 18, fontFamily: "Poppins"),
                 ),
               ),
               const Divider(
@@ -205,13 +192,11 @@ class ProfilePart extends StatelessWidget {
                 },
                 leading: const Icon(
                   Icons.privacy_tip_outlined,
-                  color: Colors.black54,),
+                  color: Colors.black54,
+                ),
                 title: const Text(
                   "Privacy Policy",
-                  style: TextStyle(
-                    fontSize: 18,
-                      fontFamily: "Poppins"
-                  ),
+                  style: TextStyle(fontSize: 18, fontFamily: "Poppins"),
                 ),
               ),
               const Divider(
@@ -219,15 +204,15 @@ class ProfilePart extends StatelessWidget {
               ),
               ListTile(
                 onTap: () {
-                  // Get.to(() => const MyOrdersScreen());
+                  Get.to(() => const Faq());
                 },
-                leading: const Icon(Icons.forum_outlined, color: Colors.black54,),
+                leading: const Icon(
+                  Icons.forum_outlined,
+                  color: Colors.black54,
+                ),
                 title: const Text(
                   "FAQ",
-                  style: TextStyle(
-                    fontSize: 18,
-                      fontFamily: "Poppins"
-                  ),
+                  style: TextStyle(fontSize: 18, fontFamily: "Poppins"),
                 ),
               ),
               const Divider(
@@ -237,13 +222,13 @@ class ProfilePart extends StatelessWidget {
                 onTap: () {
                   // Get.to(() => const MyOrdersScreen());
                 },
-                leading: const Icon(Icons.star_border_outlined, color: Colors.black54,),
+                leading: const Icon(
+                  Icons.star_border_outlined,
+                  color: Colors.black54,
+                ),
                 title: const Text(
                   "Rate Us",
-                  style: TextStyle(
-                    fontSize: 18,
-                      fontFamily: "Poppins"
-                  ),
+                  style: TextStyle(fontSize: 18, fontFamily: "Poppins"),
                 ),
               ),
               const Divider(
@@ -253,39 +238,37 @@ class ProfilePart extends StatelessWidget {
                 onTap: () {
                   // Get.to(() => const MyOrdersScreen());
                 },
-                leading: const Icon(Icons.share, color: Colors.black54,),
+                leading: const Icon(
+                  Icons.share,
+                  color: Colors.black54,
+                ),
                 title: const Text(
                   "Share & Earn",
-                  style: TextStyle(
-                    fontSize: 18,
-                      fontFamily: "Poppins"
-                  ),
+                  style: TextStyle(fontSize: 18, fontFamily: "Poppins"),
                 ),
               ),
               const Divider(
                 thickness: 1,
               ),
-                const SizedBox(
-                  height: 30,
-                ),
+              const SizedBox(
+                height: 30,
+              ),
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: SizedBox(
                   width: 120,
                   height: 40,
                   child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.black87,
-                    ),
-                      onPressed: (){
-
-                      },
-                      child: const Text("Log out",
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontFamily: "Poppins",
-                        fontWeight: FontWeight.w600
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.black87,
                       ),
+                      onPressed: () {},
+                      child: const Text(
+                        "Log out",
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.w600),
                       )),
                 ),
               ),
@@ -295,7 +278,7 @@ class ProfilePart extends StatelessWidget {
             ],
           ),
         ),
-      ),
+      )
     );
   }
 }

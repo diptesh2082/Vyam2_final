@@ -127,15 +127,17 @@ class _FirstHomeState extends State<FirstHome> {
                   // Get.back();
                   Position position = await determinePosition();
                   GetAddressFromLatLong(position);
-                  setState(() {
+                  print(address);
+                  setState(()  {
                     address;
-                  });
+                  }
+                  );
                 },
               ),
               SizedBox(
                 width: size.width * .55,
                 child:  Text(
-                        '${address}',
+                        address,
                         textAlign: TextAlign.left,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,

@@ -1,11 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:vyam_2_final/api/api.dart';
 import 'package:vyam_2_final/controllers/gym_detail.dart';
 // import 'package:vyambooking/List/list.dart';
 // import 'package:vyambooking/OrderDetails/order_details.dart';
 
 class UpcomingEvent extends StatelessWidget {
+  UpcomingApi upcomingApi = UpcomingApi();
   UpcomingEvent({
     Key? key,
     required double width,
@@ -28,9 +31,9 @@ class UpcomingEvent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-        future: upcomingEventsList(),
-        builder: (context, snapshot) {
+    return StreamBuilder<QuerySnapshot>(
+        stream: upcomingApi.getUpcomingEvents,
+        builder: (context, AsyncSnapshot snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           }
@@ -38,10 +41,19 @@ class UpcomingEvent extends StatelessWidget {
             return Text(snapshot.error.toString());
           }
           if (snapshot.hasData) {
+            final data = snapshot.requireData;
+            if (data.size == 0) {
+              return Center(
+                child: Image.asset(
+                  "assets/icons/upcomingEmpty.png",
+                  height: _width * 0.8,
+                ),
+              );
+            }
             return Padding(
               padding: const EdgeInsets.only(top: 30.0),
               child: ListView.builder(
-                  itemCount: upcomingItems.length,
+                  itemCount: data.size,
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -72,7 +84,7 @@ class UpcomingEvent extends StatelessWidget {
                                         children: [
                                           Text(
                                             "Booking ID : " +
-                                                upcomingItems[index].bookindID,
+                                                data.docs[index]["id"],
                                             style: GoogleFonts.poppins(
                                                 color: HexColor("3A3A3A"),
                                                 fontSize: 12,
@@ -82,7 +94,7 @@ class UpcomingEvent extends StatelessWidget {
                                             height: 4,
                                           ),
                                           Text(
-                                            upcomingItems[index].gymName,
+                                            data.docs[index]["gym_name"],
                                             style: GoogleFonts.poppins(
                                                 color: HexColor("3A3A3A"),
                                                 fontSize: 14,
@@ -98,7 +110,7 @@ class UpcomingEvent extends StatelessWidget {
                                                 width: 4.5,
                                               ),
                                               Text(
-                                                upcomingItems[index].location,
+                                                data.docs[index]["location"],
                                                 style: GoogleFonts.poppins(
                                                     color: HexColor("3A3A3A"),
                                                     fontSize: 14,
@@ -110,9 +122,12 @@ class UpcomingEvent extends StatelessWidget {
                                           const SizedBox(
                                             height: 6,
                                           ),
-                                          if (upcomingItems[index]
-                                              .bookingPeriod
-                                              .contains("Month"))
+                                          if (data.docs[index]["package"]
+                                                  .contains("months") ||
+                                              data.docs[index]["package"]
+                                                  .contains("Months") ||
+                                              data.docs[index]["package"]
+                                                  .contains("month"))
                                             Row(
                                               children: [
                                                 Text(
@@ -124,8 +139,8 @@ class UpcomingEvent extends StatelessWidget {
                                                           FontWeight.w700),
                                                 ),
                                                 Text(
-                                                  upcomingItems[index]
-                                                      .bookingPeriod,
+                                                  data.docs[index]["package"]
+                                                      .toUpperCase(),
                                                   style: GoogleFonts.poppins(
                                                       fontSize: 12,
                                                       color: HexColor("3A3A3A"),
@@ -134,12 +149,13 @@ class UpcomingEvent extends StatelessWidget {
                                                 ),
                                               ],
                                             ),
-                                          if (upcomingItems[index]
-                                              .bookingPeriod
-                                              .contains("Pay"))
+                                          if (data.docs[index]["package"]
+                                                  .contains("Pay") ||
+                                              data.docs[index]["package"]
+                                                  .contains("pay"))
                                             Text(
-                                              upcomingItems[index]
-                                                  .bookingPeriod,
+                                              data.docs[index]["package"]
+                                                  .toUpperCase(),
                                               style: GoogleFonts.poppins(
                                                   fontSize: 12,
                                                   color: HexColor("3A3A3A"),
@@ -149,7 +165,7 @@ class UpcomingEvent extends StatelessWidget {
                                             height: 6,
                                           ),
                                           Text(
-                                            upcomingItems[index].date,
+                                            data.docs[index]["start_date"],
                                             style: GoogleFonts.poppins(
                                                 color: HexColor("A3A3A3"),
                                                 fontSize: 12,
@@ -168,10 +184,11 @@ class UpcomingEvent extends StatelessWidget {
                                                 height: 8,
                                               ),
                                               const SizedBox(
-                                                width: 2,
+                                                width: 4,
                                               ),
                                               Text(
-                                                upcomingItems[index].eventType,
+                                                data.docs[index]["type"]
+                                                    .toUpperCase(),
                                                 style: GoogleFonts.poppins(
                                                     color: HexColor("3A3A3A"),
                                                     fontSize: 10,
@@ -197,7 +214,7 @@ class UpcomingEvent extends StatelessWidget {
           }
           return Center(
             child: Image.asset(
-              "assets/icons/bookingEmpty.png",
+              "assets/icons/upcomingEmpty.png",
               height: _width * 0.8,
             ),
           );

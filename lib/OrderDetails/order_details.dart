@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 
 class OrderDetails extends StatefulWidget {
   const OrderDetails({Key? key, required this.index, required this.orderList})
@@ -63,10 +64,19 @@ class _OrderDetailsState extends State<OrderDetails> {
                       children: [
                         Row(
                           children: [
-                            Expanded(
-                                flex: 1,
-                                child: getOderDetails[widget.index].gymImage),
-                            Expanded(
+                            Flexible(
+                                child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: Image.network(
+                                  getOderDetails[widget.index]['image'],
+                                  fit: BoxFit.cover,
+                                  height: 150,
+                                ),
+                              ),
+                            )),
+                            Flexible(
                               flex: 1,
                               child: Padding(
                                 padding: const EdgeInsets.only(
@@ -77,8 +87,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                                   children: [
                                     Text(
                                       "Booking ID : " +
-                                          getOderDetails[widget.index]
-                                              .bookindID,
+                                          getOderDetails[widget.index]['id'],
                                       style: GoogleFonts.poppins(
                                           color: HexColor("3A3A3A"),
                                           fontSize: 12,
@@ -88,7 +97,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                                       height: 4,
                                     ),
                                     Text(
-                                      getOderDetails[widget.index].gymName,
+                                      getOderDetails[widget.index]['gym_name'],
                                       style: GoogleFonts.poppins(
                                           color: HexColor("3A3A3A"),
                                           fontSize: 14,
@@ -104,7 +113,8 @@ class _OrderDetailsState extends State<OrderDetails> {
                                           width: 4.5,
                                         ),
                                         Text(
-                                          getOderDetails[widget.index].location,
+                                          getOderDetails[widget.index]
+                                              ['location'],
                                           style: GoogleFonts.poppins(
                                               color: HexColor("3A3A3A"),
                                               fontSize: 14,
@@ -118,13 +128,29 @@ class _OrderDetailsState extends State<OrderDetails> {
                                     Row(
                                       children: [
                                         Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
-                                            Text(
-                                              getOderDetails[widget.index].date,
-                                              style: GoogleFonts.poppins(
-                                                  color: HexColor("A3A3A3"),
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w500),
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  "End on :",
+                                                  style: GoogleFonts.poppins(
+                                                      color: HexColor("A3A3A3"),
+                                                      fontSize: 12,
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
+                                                Text(
+                                                  getOderDetails[widget.index]
+                                                      ['end_date'],
+                                                  style: GoogleFonts.poppins(
+                                                      color: HexColor("A3A3A3"),
+                                                      fontSize: 12,
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
+                                              ],
                                             ),
                                             Row(
                                               children: [
@@ -153,7 +179,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                                         const SizedBox(
                                           width: 5,
                                         ),
-                                        Spacer(),
+                                        const Spacer(),
                                         Padding(
                                           padding: const EdgeInsets.only(
                                               right: 20.0),
@@ -162,7 +188,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                                                 CrossAxisAlignment.center,
                                             children: [
                                               Image.asset(
-                                                "assets/icons/Bookings-bx_bxs-direction-right.png",
+                                                "assets/icons/bx_bxs-direction-right.png",
                                                 height: 20,
                                               ),
                                               Text(
@@ -199,7 +225,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                                               child: Text(
                                                 "OTP : " +
                                                     getOderDetails[widget.index]
-                                                        .otp,
+                                                        ['otp'],
                                                 style: GoogleFonts.poppins(
                                                     fontSize: 15,
                                                     fontWeight: FontWeight.w700,
@@ -209,36 +235,48 @@ class _OrderDetailsState extends State<OrderDetails> {
                                         const SizedBox(
                                           width: 5,
                                         ),
-                                        Container(
-                                            decoration: BoxDecoration(
-                                                color: HexColor("292F3D"),
-                                                borderRadius:
-                                                    BorderRadius.circular(10)),
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 14,
-                                                  right: 14,
-                                                  top: 6,
-                                                  bottom: 6),
-                                              child: Row(
-                                                children: [
-                                                  Image.asset(
-                                                      "assets/icons/Bookings-vuesax-linear-call.png"),
-                                                  const SizedBox(
-                                                    width: 5,
-                                                  ),
-                                                  Text(
-                                                    "Call",
-                                                    style: GoogleFonts.poppins(
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.w700,
-                                                        color:
-                                                            HexColor("FFFFFF")),
-                                                  ),
-                                                ],
-                                              ),
-                                            )),
+                                        InkWell(
+                                          onTap: () async {
+                                            var number =
+                                                getOderDetails[widget.index]
+                                                    ['phone_number'];
+                                            FlutterPhoneDirectCaller.callNumber(
+                                                number);
+                                          },
+                                          child: Container(
+                                              decoration: BoxDecoration(
+                                                  color: HexColor("292F3D"),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10)),
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 14,
+                                                    right: 14,
+                                                    top: 6,
+                                                    bottom: 6),
+                                                child: Row(
+                                                  children: [
+                                                    Image.asset(
+                                                        "assets/icons/call.png"),
+                                                    const SizedBox(
+                                                      width: 5,
+                                                    ),
+                                                    Text(
+                                                      "Call",
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                              fontSize: 15,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w700,
+                                                              color: HexColor(
+                                                                  "FFFFFF")),
+                                                    ),
+                                                  ],
+                                                ),
+                                              )),
+                                        ),
                                       ],
                                     ),
                                   ],
@@ -273,16 +311,15 @@ class _OrderDetailsState extends State<OrderDetails> {
                                   fontSize: 20, fontWeight: FontWeight.w700),
                             ),
                             const Spacer(),
-                            if (getOderDetails[widget.index]
-                                .bookingPeriod
+                            if (getOderDetails[widget.index]['workout']
                                 .contains("Pay"))
                               Text(
-                                getOderDetails[widget.index].bookingPeriod,
+                                getOderDetails[widget.index]['workout']
+                                    .toUpperCase(),
                                 style: GoogleFonts.poppins(
                                     fontSize: 20, fontWeight: FontWeight.w700),
                               ),
-                            if (getOderDetails[widget.index]
-                                .bookingPeriod
+                            if (getOderDetails[widget.index]['workout']
                                 .contains("Months"))
                               Row(
                                 children: [
@@ -293,7 +330,8 @@ class _OrderDetailsState extends State<OrderDetails> {
                                         fontWeight: FontWeight.w700),
                                   ),
                                   Text(
-                                    getOderDetails[widget.index].bookingPeriod,
+                                    getOderDetails[widget.index]['workout']
+                                        .toUpperCase(),
                                     style: GoogleFonts.poppins(
                                         fontSize: 20,
                                         fontWeight: FontWeight.w700),
@@ -311,7 +349,8 @@ class _OrderDetailsState extends State<OrderDetails> {
                             ),
                             const Spacer(),
                             Text(
-                              getOderDetails[widget.index].bookingPeriod,
+                              getOderDetails[widget.index]['workout']
+                                  .toUpperCase(),
                               style: GoogleFonts.poppins(
                                   fontSize: 18, fontWeight: FontWeight.w400),
                             ),
@@ -326,7 +365,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                             ),
                             const Spacer(),
                             Text(
-                              getOderDetails[widget.index].startDate,
+                              getOderDetails[widget.index]['start_date'],
                               style: GoogleFonts.poppins(
                                   fontSize: 18, fontWeight: FontWeight.w400),
                             ),
@@ -341,7 +380,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                             ),
                             const Spacer(),
                             Text(
-                              getOderDetails[widget.index].endDate,
+                              getOderDetails[widget.index]['end_date'],
                               style: GoogleFonts.poppins(
                                   fontSize: 18, fontWeight: FontWeight.w400),
                             ),
@@ -386,7 +425,8 @@ class _OrderDetailsState extends State<OrderDetails> {
                             ),
                             const Spacer(),
                             Text(
-                              "\$" "${getOderDetails[widget.index].amount}",
+                              "Rs " +
+                                  getOderDetails[widget.index]['total_amount'],
                               style: GoogleFonts.poppins(
                                   fontSize: 18, fontWeight: FontWeight.w400),
                             ),
@@ -401,7 +441,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                             ),
                             const Spacer(),
                             Text(
-                              "\$" "${getOderDetails[widget.index].discount}",
+                              getOderDetails[widget.index]['discount'],
                               style: GoogleFonts.poppins(
                                   fontSize: 18, fontWeight: FontWeight.w400),
                             ),
@@ -416,7 +456,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                             ),
                             const Spacer(),
                             Text(
-                              "${getOderDetails[widget.index].promocode}",
+                              getOderDetails[widget.index]['promocode'],
                               style: GoogleFonts.poppins(
                                   fontSize: 18, fontWeight: FontWeight.w400),
                             ),
@@ -433,8 +473,8 @@ class _OrderDetailsState extends State<OrderDetails> {
                             ),
                             const Spacer(),
                             Text(
-                              "\$"
-                              "${getOderDetails[widget.index].amount - getOderDetails[widget.index].discount}",
+                              "Rs " +
+                                  getOderDetails[widget.index]['grand_total'],
                               style: GoogleFonts.poppins(
                                   fontSize: 21,
                                   fontWeight: FontWeight.w700,
@@ -475,14 +515,13 @@ class _OrderDetailsState extends State<OrderDetails> {
                                 color: HexColor("FFFFFF")),
                           ),
                         )),
-                    Spacer(),
+                    const Spacer(),
                     Container(
                       decoration: const BoxDecoration(
                           color: Colors.amber, shape: BoxShape.circle),
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
-                        child: Image.asset(
-                            "assets/icons/Bookings-order details-vuesax-linear-vuesax-linear-message-question.png"),
+                        child: Image.asset("assets/icons/message-question.png"),
                       ),
                     )
                   ],

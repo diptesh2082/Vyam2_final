@@ -14,7 +14,7 @@ import 'package:vyam_2_final/Home/views/product_gyms.dart';
 import 'package:vyam_2_final/api/api.dart';
 import 'package:vyam_2_final/controllers/home_controller.dart';
 import 'package:vyam_2_final/controllers/location_controller.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../Notifications/notification.dart';
 import 'gyms.dart';
 
@@ -39,8 +39,8 @@ class _FirstHomeState extends State<FirstHome> {
 
   @override
   void initState() {
-    userDetails.getData();
-
+    getUserDetails();
+    getNumber();
     int getDays = int.parse(daysLeft[0]["dayleft"]);
     getDays = 28 - getDays;
     finaldaysLeft = getDays / 28;
@@ -59,6 +59,12 @@ class _FirstHomeState extends State<FirstHome> {
       progressColor = Colors.yellow;
     }
     super.initState();
+  }
+
+  getUserDetails() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences.setString("number", "8859451134");
+    userDetails.getData();
   }
 
   final backgroundColor = Colors.grey[200];
@@ -96,6 +102,7 @@ class _FirstHomeState extends State<FirstHome> {
   }
 
   String address = "Tap here To search your location";
+  // ignore: non_constant_identifier_names
   Future<void> GetAddressFromLatLong(Position position) async {
     List<Placemark> placemark =
         await placemarkFromCoordinates(position.latitude, position.longitude);
@@ -173,7 +180,7 @@ class _FirstHomeState extends State<FirstHome> {
               color: Colors.black,
             ),
             onPressed: () {
-              Get.to(NotificationDetails());
+              Get.to(const NotificationDetails());
             },
           ),
         ],

@@ -124,7 +124,6 @@ class _BookingDetailsState extends State<BookingDetails> {
           //     color: HexColor("3A3A3A"),
           //   ),
           //
-
           elevation: 0,
           backgroundColor: Colors.transparent,
           centerTitle: true,
@@ -136,13 +135,15 @@ class _BookingDetailsState extends State<BookingDetails> {
                 fontWeight: FontWeight.w600),
           ),
         ),
-        body: TabBarView(physics: NeverScrollableScrollPhysics(), children: [
-          UpcomingEvent(width: _width),
-          ActiveEvent(width: _width),
-          OlderEvent(
-            width: _width,
-          )
-        ]),
+        body: TabBarView(
+            physics: const NeverScrollableScrollPhysics(),
+            children: [
+              UpcomingEvent(width: _width),
+              ActiveEvent(width: _width),
+              OlderEvent(
+                width: _width,
+              )
+            ]),
       ),
     );
   }

@@ -52,6 +52,9 @@ dependencies:
   geocoding: ^2.0.2
   firebase_storage: ^10.2.7
   equatable: ^2.0.3
+  shared_preferences: ^2.0.13
+  cached_network_image: ^3.2.0
+  flutter_phone_direct_caller: ^2.1.0
 
 
 dev_dependencies:

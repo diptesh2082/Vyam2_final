@@ -779,7 +779,7 @@ class _Screen1State extends State<Screen1> {
                                 fontWeight: FontWeight.w600),
                           ),
                           onPressed: (){
-                            Get.to( Packeges());
+                            Get.to(()=> Packeges());
                           },
                         ),
                         SizedBox(

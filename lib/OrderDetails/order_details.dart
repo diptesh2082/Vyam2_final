@@ -128,6 +128,8 @@ class _OrderDetailsState extends State<OrderDetails> {
                                     Row(
                                       children: [
                                         Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
                                             Row(
                                               children: [

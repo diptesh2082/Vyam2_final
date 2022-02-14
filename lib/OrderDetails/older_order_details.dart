@@ -127,6 +127,8 @@ class _OlderOderDetailsState extends State<OlderOderDetails> {
                                 Row(
                                   children: [
                                     Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Row(
                                           children: [

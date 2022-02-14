@@ -187,11 +187,11 @@ class ActiveEvent extends StatelessWidget {
                                                 decoration: BoxDecoration(
                                                     color: HexColor("49C000"),
                                                     shape: BoxShape.circle),
-                                                width: 8,
-                                                height: 8,
+                                                width: 6,
+                                                height: 6,
                                               ),
                                               const SizedBox(
-                                                width: 2,
+                                                width: 5,
                                               ),
                                               Text(
                                                 data.docs[index]['type']

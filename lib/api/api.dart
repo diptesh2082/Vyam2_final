@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:equatable/equatable.dart';
+import 'package:get/get.dart';
 
 class UserDetails {
   String number = "8859451134";
@@ -61,3 +63,49 @@ class CouponApi {
     return couponList;
   }
 }
+
+// class bannerController extends Equatable{
+//
+//   @override
+//   // TODO: implement props
+//   List<Object?> get props => [];
+//
+// }
+
+// class ProductApi extends Equatable{
+//   final int id;
+//   final String name;
+//   final String address;
+//
+//   ProductApi(this.id, this.name, this.address);
+//
+//
+//   @override
+//   // TODO: implement props
+//   List<Object?> get props => [];
+//
+// }
+
+// class ProductApi {
+//   final Stream<QuerySnapshot> getnotification = FirebaseFirestore.instance.
+//   collection("product_details")
+//       .doc("RBRQKBuboUVvDAriCCVe")
+//       .collection("address")
+//       .snapshots();
+//
+//   Future clearProductList() async {
+//     var remainderFirestore = FirebaseFirestore.instance.
+//     collection("product_details")
+//         .doc("RBRQKBuboUVvDAriCCVe")
+//         .collection("address");
+//     try {
+//       await remainderFirestore.get().then((value) {
+//         for (DocumentSnapshot ds in value.docs) {
+//           ds.reference.delete();
+//         }
+//       });
+//     } catch (e) {
+//       return null;
+//     }
+//   }
+// }

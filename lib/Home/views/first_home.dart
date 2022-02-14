@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
@@ -101,6 +103,7 @@ class _FirstHomeState extends State<FirstHome> {
     address = "${place.name},${place.street},${place.postalCode}";
   }
 
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -132,11 +135,18 @@ class _FirstHomeState extends State<FirstHome> {
                 onPressed: () async {
                   // Get.back();
                   Position position = await _determinePosition();
-                  GetAddressFromLatLong(position);
-                  // print(address);
+                  await GetAddressFromLatLong(position);
+                  print((address));
                   setState(() {
-                    address;
+                    address=address;
                   });
+                  await FirebaseFirestore.instance.collection("user_details/7407926060/address")
+                  .add({
+                    "address": address,
+                    "lat": position.latitude,
+                    "long": position.longitude
+                  });
+
                 },
               ),
               SizedBox(

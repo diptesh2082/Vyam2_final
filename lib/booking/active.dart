@@ -1,13 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
-// import 'package:vyambooking/List/list.dart';
-// import 'package:vyambooking/OrderDetails/order_details.dart';
-
+import 'package:vyam_2_final/api/api.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import '../OrderDetails/order_details.dart';
-import '../controllers/gym_detail.dart';
 
 class ActiveEvent extends StatelessWidget {
+  ActiveBookingApi activeBookingApi = ActiveBookingApi();
   ActiveEvent({
     Key? key,
     required double width,
@@ -17,22 +17,11 @@ class ActiveEvent extends StatelessWidget {
   final double _width;
   List events = [];
 
-  Future ActiveEventsList() async {
-    events = activeEventItems;
-    await Future.delayed(const Duration(milliseconds: 500));
-    if (events.isNotEmpty) {
-      return events;
-    }
-    if (events.isEmpty) {
-      return null;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-        future: ActiveEventsList(),
-        builder: (context, snapshot) {
+    return StreamBuilder<QuerySnapshot>(
+        stream: activeBookingApi.getActiveBooking,
+        builder: (context, AsyncSnapshot snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           }
@@ -40,10 +29,11 @@ class ActiveEvent extends StatelessWidget {
             return Text(snapshot.error.toString());
           }
           if (snapshot.hasData) {
+            final data = snapshot.requireData;
             return Padding(
               padding: const EdgeInsets.only(top: 30.0),
               child: ListView.builder(
-                  itemCount: activeEventItems.length,
+                  itemCount: data.size,
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -54,7 +44,7 @@ class ActiveEvent extends StatelessWidget {
                               MaterialPageRoute(
                                   builder: (context) => OrderDetails(
                                         index: index,
-                                        orderList: activeEventItems,
+                                        orderList: data.docs,
                                       )));
                         },
                         child: Card(
@@ -82,8 +72,7 @@ class ActiveEvent extends StatelessWidget {
                                         children: [
                                           Text(
                                             "Booking ID : " +
-                                                activeEventItems[index]
-                                                    .bookindID,
+                                                data.docs[index]['id'],
                                             style: GoogleFonts.poppins(
                                                 color: HexColor("3A3A3A"),
                                                 fontSize: 12,
@@ -93,7 +82,7 @@ class ActiveEvent extends StatelessWidget {
                                             height: 4,
                                           ),
                                           Text(
-                                            activeEventItems[index].gymName,
+                                            data.docs[index]['gym_name'],
                                             style: GoogleFonts.poppins(
                                                 color: HexColor("3A3A3A"),
                                                 fontSize: 14,
@@ -109,8 +98,7 @@ class ActiveEvent extends StatelessWidget {
                                                 width: 4.5,
                                               ),
                                               Text(
-                                                activeEventItems[index]
-                                                    .location,
+                                                data.docs[index]['location'],
                                                 style: GoogleFonts.poppins(
                                                     color: HexColor("3A3A3A"),
                                                     fontSize: 14,
@@ -122,9 +110,12 @@ class ActiveEvent extends StatelessWidget {
                                           const SizedBox(
                                             height: 6,
                                           ),
-                                          if (activeEventItems[index]
-                                              .bookingPeriod
-                                              .contains("Month"))
+                                          if (data.docs[index]["workout"]
+                                                  .contains("months") ||
+                                              data.docs[index]["workout"]
+                                                  .contains("Months") ||
+                                              data.docs[index]["workout"]
+                                                  .contains("month"))
                                             Row(
                                               children: [
                                                 Text(
@@ -136,8 +127,8 @@ class ActiveEvent extends StatelessWidget {
                                                           FontWeight.w700),
                                                 ),
                                                 Text(
-                                                  activeEventItems[index]
-                                                      .bookingPeriod,
+                                                  data.docs[index]['workout']
+                                                      .toUpperCase(),
                                                   style: GoogleFonts.poppins(
                                                       fontSize: 12,
                                                       color: HexColor("3A3A3A"),
@@ -146,12 +137,13 @@ class ActiveEvent extends StatelessWidget {
                                                 ),
                                               ],
                                             ),
-                                          if (activeEventItems[index]
-                                              .bookingPeriod
-                                              .contains("Pay"))
+                                          if (data.docs[index]['workout']
+                                                  .contains("Pay") ||
+                                              data.docs[index]['workout']
+                                                  .contains("pay"))
                                             Text(
-                                              activeEventItems[index]
-                                                  .bookingPeriod,
+                                              data.docs[index]['workout']
+                                                  .toUpperCase(),
                                               style: GoogleFonts.poppins(
                                                   fontSize: 12,
                                                   color: HexColor("3A3A3A"),
@@ -160,12 +152,25 @@ class ActiveEvent extends StatelessWidget {
                                           const SizedBox(
                                             height: 6,
                                           ),
-                                          Text(
-                                            activeEventItems[index].date,
-                                            style: GoogleFonts.poppins(
-                                                color: HexColor("A3A3A3"),
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w500),
+                                          Row(
+                                            children: [
+                                              Text(
+                                                "Ends on : ",
+                                                style: GoogleFonts.poppins(
+                                                    color: HexColor("A3A3A3"),
+                                                    fontSize: 12,
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              ),
+                                              Text(
+                                                data.docs[index]['end_date'],
+                                                style: GoogleFonts.poppins(
+                                                    color: HexColor("A3A3A3"),
+                                                    fontSize: 12,
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              ),
+                                            ],
                                           ),
                                           const SizedBox(
                                             height: 6,
@@ -183,8 +188,8 @@ class ActiveEvent extends StatelessWidget {
                                                 width: 2,
                                               ),
                                               Text(
-                                                activeEventItems[index]
-                                                    .eventType,
+                                                data.docs[index]['type']
+                                                    .toUpperCase(),
                                                 style: GoogleFonts.poppins(
                                                     color: HexColor("3A3A3A"),
                                                     fontSize: 10,
@@ -197,8 +202,26 @@ class ActiveEvent extends StatelessWidget {
                                       ),
                                     )),
                                 Expanded(
-                                    flex: 1,
-                                    child: activeEventItems[index].gymImage),
+                                  child: CachedNetworkImage(
+                                    imageUrl:
+                                        "http://via.placeholder.com/200x150",
+                                    imageBuilder: (context, imageProvider) =>
+                                        Container(
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            image: imageProvider,
+                                            fit: BoxFit.cover,
+                                            colorFilter: const ColorFilter.mode(
+                                                Colors.red,
+                                                BlendMode.colorBurn)),
+                                      ),
+                                    ),
+                                    placeholder: (context, url) =>
+                                        const CircularProgressIndicator(),
+                                    errorWidget: (context, url, error) =>
+                                        const Icon(Icons.error),
+                                  ),
+                                )
                               ],
                             ),
                           ),

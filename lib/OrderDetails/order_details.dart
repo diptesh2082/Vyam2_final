@@ -162,7 +162,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                                                 CrossAxisAlignment.center,
                                             children: [
                                               Image.asset(
-                                                "assets/icons/Bookings-bx_bxs-direction-right.png",
+                                                "assets/icons/bx_bxs-direction-right.png",
                                                 height: 20,
                                               ),
                                               Text(
@@ -223,7 +223,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                                               child: Row(
                                                 children: [
                                                   Image.asset(
-                                                      "assets/icons/Bookings-vuesax-linear-call.png"),
+                                                      "assets/icons/call.png"),
                                                   const SizedBox(
                                                     width: 5,
                                                   ),
@@ -481,8 +481,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                           color: Colors.amber, shape: BoxShape.circle),
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
-                        child: Image.asset(
-                            "assets/icons/Bookings-order details-vuesax-linear-vuesax-linear-message-question.png"),
+                        child: Image.asset("assets/icons/message-question.png"),
                       ),
                     )
                   ],

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:vyam_2_final/api/api.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import '../OrderDetails/order_details.dart';
 
 class ActiveEvent extends StatelessWidget {
@@ -202,26 +201,14 @@ class ActiveEvent extends StatelessWidget {
                                       ),
                                     )),
                                 Expanded(
-                                  child: CachedNetworkImage(
-                                    imageUrl:
-                                        "http://via.placeholder.com/200x150",
-                                    imageBuilder: (context, imageProvider) =>
-                                        Container(
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                            image: imageProvider,
-                                            fit: BoxFit.cover,
-                                            colorFilter: const ColorFilter.mode(
-                                                Colors.red,
-                                                BlendMode.colorBurn)),
-                                      ),
-                                    ),
-                                    placeholder: (context, url) =>
-                                        const CircularProgressIndicator(),
-                                    errorWidget: (context, url, error) =>
-                                        const Icon(Icons.error),
+                                    child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Image.network(
+                                    data.dos[index]['image'],
+                                    fit: BoxFit.cover,
+                                    height: 150,
                                   ),
-                                )
+                                ))
                               ],
                             ),
                           ),

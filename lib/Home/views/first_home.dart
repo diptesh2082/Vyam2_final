@@ -170,7 +170,7 @@ class _FirstHomeState extends State<FirstHome> {
               color: Colors.black,
             ),
             onPressed: () {
-              Get.to(NotificationDetails());
+              Get.to(const NotificationDetails());
             },
           ),
         ],

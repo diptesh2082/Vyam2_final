@@ -69,3 +69,23 @@ class CouponApi {
     return couponList;
   }
 }
+
+class UpcomingApi {
+  Stream<QuerySnapshot> getUpcomingEvents = FirebaseFirestore.instance
+      .collection('user_details')
+      .doc(number)
+      .collection("bookings")
+      .doc("upcoming")
+      .collection("upcoming_booking")
+      .snapshots();
+}
+
+class ActiveBookingApi {
+  Stream<QuerySnapshot> getActiveBooking = FirebaseFirestore.instance
+      .collection('user_details')
+      .doc(number)
+      .collection("bookings")
+      .doc("active")
+      .collection("active_booking")
+      .snapshots();
+}

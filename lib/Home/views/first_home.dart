@@ -136,7 +136,7 @@ class _FirstHomeState extends State<FirstHome> {
                   // Get.back();
                   Position position = await _determinePosition();
                   await GetAddressFromLatLong(position);
-                  print((address));
+
                   setState(() {
                     address=address;
                   });

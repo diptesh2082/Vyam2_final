@@ -147,3 +147,9 @@ class OlderBookingApi {
       .collection("older_booking")
       .snapshots();
 }
+
+class GymDetailApi{
+  Stream<QuerySnapshot> getGymDetails = FirebaseFirestore.instance
+      .collection("product_details")
+      .snapshots();
+}

@@ -10,9 +10,15 @@ import 'package:vyam_2_final/controllers/packages/packages.dart';
 
 import 'know_trainer.dart';
 
-class GymDetails extends StatelessWidget {
-  const GymDetails({Key? key}) : super(key: key);
+class GymDetails extends StatefulWidget {
+  final getId ;
+  const GymDetails({Key? key, required this.getId}) : super(key: key);
 
+  @override
+  State<GymDetails> createState() => _GymDetailsState();
+}
+
+class _GymDetailsState extends State<GymDetails> {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -773,7 +779,7 @@ class _Screen1State extends State<Screen1> {
                                 fontWeight: FontWeight.w600),
                           ),
                           onPressed: (){
-                            Get.to(const Packeges());
+                            Get.to( Packeges());
                           },
                         ),
                         SizedBox(

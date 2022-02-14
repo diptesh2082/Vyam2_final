@@ -11,7 +11,8 @@ import 'bookingDetails.dart';
 import 'neargym.dart';
 
 class Packeges extends StatefulWidget {
-  const Packeges({Key? key}) : super(key: key);
+  final finalId;
+  const Packeges({Key? key, required this.finalId}) : super(key: key);
 
   @override
   _PackegesState createState() => _PackegesState();

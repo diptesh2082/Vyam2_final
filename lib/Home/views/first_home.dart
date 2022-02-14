@@ -147,8 +147,9 @@ class _FirstHomeState extends State<FirstHome> {
                   setState(() {
                     address=address;
                   });
-                  await FirebaseFirestore.instance.collection("user_details/7407926060/address")
-                  .add({
+                  await FirebaseFirestore.instance.collection("user_details")
+                  .doc("7407926060")
+                  .update({
                     "address": address,
                     "lat": position.latitude,
                     "long": position.longitude

@@ -3,15 +3,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vyam_2_final/Home/bookings/gym_details.dart';
+import 'package:vyam_2_final/api/api.dart';
 import 'package:vyam_2_final/controllers/packages/packages.dart';
 
 class ProductGyms extends StatelessWidget {
 
 
   // const ProductGyms({Key? key}) : super(key: key);
-  const ProductGyms( this.controller,this.length);
+  ProductGyms( this.controller,this.length);
   final List controller;
   final double length;
+  GymDetailApi gymDetailApi = GymDetailApi();
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -19,39 +21,31 @@ class ProductGyms extends StatelessWidget {
       width: size.width*.94,
       child: SingleChildScrollView(
         child: StreamBuilder<QuerySnapshot>(
-          stream: FirebaseFirestore.instance.
-          collection("product_details")
-              .snapshots(),
-          builder: (context,streamSnapshot){
+          stream: gymDetailApi.getGymDetails,
+          builder: (context,AsyncSnapshot streamSnapshot){
             if (streamSnapshot.connectionState == ConnectionState.waiting){
               return const Center(
                 child: CircularProgressIndicator(),
               );
             }
-            final data = streamSnapshot.data!.docs;
+            final data = streamSnapshot.requireData;
             return ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              itemCount: data.length,
+              itemCount: data.size,
               itemBuilder: (context,int index){
                 return Column(
                   children: [
                     Stack(
                       children: [
                         GestureDetector(
-                          onTap: (){
-                            print(data.length);
-                            // FirebaseFirestore.instance.
-                            // collection("product_details")
-                            //     .doc("RBRQKBuboUVvDAriCCVe")
-                            //     .collection("address")
-                            //     .snapshots()
-                            //     .listen((event) {
-                            //   for (var element in event.docs) {
-                            //     print(element["address"]);
-                            //   }
-                            // });
-                            // Get.to(()=>const GymDetails());
+                          onTap: () async {
+                            print(data.size);
+                            print(data.docs[index].id);
+
+                            Get.to(()=> GymDetails(getId: data.docs[index].id),
+
+                            );
                           },
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(15),
@@ -76,7 +70,7 @@ class ProductGyms extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children:  [
                                 Text(
-                                  data[index]["name"],
+                                  data.docs[index]["name"],
                                   textAlign: TextAlign.center,
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
@@ -90,7 +84,7 @@ class ProductGyms extends StatelessWidget {
                                   height: 2,
                                 ),
                                 Text(
-                                  data[index]["address"],
+                                  data.docs[index]["address"],
                                   textAlign: TextAlign.center,
                                   style: const TextStyle(
                                       color: Colors.white,

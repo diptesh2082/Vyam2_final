@@ -1,3 +1,6 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,9 +13,9 @@ import '../package_controller.dart';
 import 'bookingDetails.dart';
 import 'neargym.dart';
 
-
 class Packeges extends StatefulWidget {
-  const Packeges({Key? key}) : super(key: key);
+  final getFinalID;
+  const Packeges({Key? key, required this.getFinalID}) : super(key: key);
 
   @override
   _PackegesState createState() => _PackegesState();
@@ -27,15 +30,15 @@ class _PackegesState extends State<Packeges> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-           iconSize: 25,
-           icon: const Icon(
-             CupertinoIcons.back,
-             color: Colors.black,
-           ),
-           onPressed: () {
-             Get.back();
-           },
-         ),
+          iconSize: 25,
+          icon: const Icon(
+            CupertinoIcons.back,
+            color: Colors.black,
+          ),
+          onPressed: () {
+            Get.back();
+          },
+        ),
         elevation: 0,
         backgroundColor: Colors.transparent,
         centerTitle: true,
@@ -78,7 +81,7 @@ class _PackegesState extends State<Packeges> {
                                   if (booking[snapshot].price > 100)
                                     Column(
                                       crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           "Trending",
@@ -111,7 +114,7 @@ class _PackegesState extends State<Packeges> {
                                       if (booking[snapshot].price > 100)
                                         Column(
                                           crossAxisAlignment:
-                                          CrossAxisAlignment.end,
+                                              CrossAxisAlignment.end,
                                           children: [
                                             Container(
                                               margin: const EdgeInsets.all(5.0),
@@ -122,10 +125,10 @@ class _PackegesState extends State<Packeges> {
                                                   right: 5),
                                               decoration: BoxDecoration(
                                                   borderRadius:
-                                                  BorderRadius.circular(5),
+                                                      BorderRadius.circular(5),
                                                   border: Border.all(
                                                       color:
-                                                      HexColor("49C000"))),
+                                                          HexColor("49C000"))),
                                               child: Text(
                                                 '20% off',
                                                 style: GoogleFonts.poppins(
@@ -144,7 +147,7 @@ class _PackegesState extends State<Packeges> {
                                                       fontSize: 15,
                                                       color: HexColor("BFB9B9"),
                                                       fontWeight:
-                                                      FontWeight.w600),
+                                                          FontWeight.w600),
                                                 ),
                                                 const SizedBox(
                                                   width: 2,
@@ -155,7 +158,7 @@ class _PackegesState extends State<Packeges> {
                                                       fontSize: 14,
                                                       color: HexColor("3A3A3A"),
                                                       fontWeight:
-                                                      FontWeight.w600),
+                                                          FontWeight.w600),
                                                 ),
                                               ],
                                             ),
@@ -185,21 +188,10 @@ class _PackegesState extends State<Packeges> {
                               ),
                               Row(
                                 children: [
-                                  MaterialButton(
-                                    elevation: 0,
-                                    onPressed: () {},
-                                    color: Colors.transparent,
-                                    shape: RoundedRectangleBorder(
-                                        side: BorderSide(
-                                            width: 1.5,
-                                            color: HexColor("FFCA00")),
-                                        borderRadius: BorderRadius.circular(5)),
-                                    child: Center(
-                                        child: Text("Details",
-                                            style: GoogleFonts.poppins(
-                                                fontSize: 12,
-                                                color: HexColor("FFCA00"),
-                                                fontWeight: FontWeight.w600))),
+                                  Image.asset(
+                                    "assets/images/gymCartoon.png",
+                                    height: 50,
+                                    color: Colors.yellow.shade600,
                                   ),
                                   const Spacer(),
                                   MaterialButton(
@@ -211,7 +203,7 @@ class _PackegesState extends State<Packeges> {
                                     color: HexColor("292F3D"),
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
-                                        BorderRadius.circular(10)),
+                                            BorderRadius.circular(10)),
                                     child: Center(
                                         child: Text("Buy now",
                                             style: GoogleFonts.poppins(

@@ -1,6 +1,6 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:equatable/equatable.dart';
-import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 var number;
@@ -71,7 +71,6 @@ class CouponApi {
     return couponList;
   }
 }
-
 
 // class bannerController extends Equatable{
 //
@@ -148,8 +147,7 @@ class OlderBookingApi {
       .snapshots();
 }
 
-class GymDetailApi{
-  Stream<QuerySnapshot> getGymDetails = FirebaseFirestore.instance
-      .collection("product_details")
-      .snapshots();
+class GymDetailApi {
+  Stream<QuerySnapshot> getGymDetails =
+      FirebaseFirestore.instance.collection("product_details").snapshots();
 }

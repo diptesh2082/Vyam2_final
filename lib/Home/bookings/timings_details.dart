@@ -1,22 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import 'gym_details.dart';
-
+import 'package:get/get.dart';
 
 class Timing extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      builder: () => MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: Timing_Screen(),
-      ),
-    );
-  }
-}
+  const Timing({Key? key}) : super(key: key);
 
-class Timing_Screen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,8 +18,7 @@ class Timing_Screen extends StatelessWidget {
             ),
             leading: GestureDetector(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Screen1()));
+                Get.back();
               },
               child: const Icon(
                 Icons.arrow_back,
@@ -67,10 +53,12 @@ class Timing_Screen extends StatelessWidget {
                           FittedBox(
                             child: IntrinsicHeight(
                                 child: Row(
+                              children: [
+                                Column(
                                   children: [
-                                    Column(
-                                      children: [
-                                        Wrap(direction: Axis.vertical, children: const [
+                                    Wrap(
+                                        direction: Axis.vertical,
+                                        children: const [
                                           Text(' Morning',
                                               style: TextStyle(
                                                   color: Colors.grey,
@@ -91,23 +79,25 @@ class Timing_Screen extends StatelessWidget {
                                                   color: Colors.grey,
                                                   fontSize: 14.5)),
                                         ])
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      width:
+                                  ],
+                                ),
+                                SizedBox(
+                                  width:
                                       MediaQuery.of(context).size.width * 0.06,
-                                    ),
-                                    const VerticalDivider(
-                                      thickness: 1,
-                                      color: Colors.grey,
-                                    ),
-                                    SizedBox(
-                                      width:
+                                ),
+                                const VerticalDivider(
+                                  thickness: 1,
+                                  color: Colors.grey,
+                                ),
+                                SizedBox(
+                                  width:
                                       MediaQuery.of(context).size.width * 0.06,
-                                    ),
-                                    Column(
-                                      children: [
-                                        Wrap(direction: Axis.vertical, children: const [
+                                ),
+                                Column(
+                                  children: [
+                                    Wrap(
+                                        direction: Axis.vertical,
+                                        children: const [
                                           Text(' Evening',
                                               style: TextStyle(
                                                   color: Colors.grey,
@@ -128,10 +118,10 @@ class Timing_Screen extends StatelessWidget {
                                                   color: Colors.grey,
                                                   fontSize: 14.5)),
                                         ])
-                                      ],
-                                    ),
                                   ],
-                                )),
+                                ),
+                              ],
+                            )),
                           )
                         ],
                       ),
@@ -159,10 +149,12 @@ class Timing_Screen extends StatelessWidget {
                           FittedBox(
                             child: IntrinsicHeight(
                                 child: Row(
+                              children: [
+                                Column(
                                   children: [
-                                    Column(
-                                      children: [
-                                        Wrap(direction: Axis.vertical, children: const [
+                                    Wrap(
+                                        direction: Axis.vertical,
+                                        children: const [
                                           Text(' Morning',
                                               style: TextStyle(
                                                   color: Colors.grey,
@@ -183,10 +175,10 @@ class Timing_Screen extends StatelessWidget {
                                                   color: Colors.grey,
                                                   fontSize: 14.5)),
                                         ])
-                                      ],
-                                    ),
                                   ],
-                                )),
+                                ),
+                              ],
+                            )),
                           )
                         ],
                       ),
@@ -214,10 +206,12 @@ class Timing_Screen extends StatelessWidget {
                           FittedBox(
                             child: IntrinsicHeight(
                                 child: Row(
+                              children: [
+                                Column(
                                   children: [
-                                    Column(
-                                      children: [
-                                        Wrap(direction: Axis.vertical, children: const [
+                                    Wrap(
+                                        direction: Axis.vertical,
+                                        children: const [
                                           Text(' Morning',
                                               style: TextStyle(
                                                   color: Colors.grey,
@@ -238,23 +232,25 @@ class Timing_Screen extends StatelessWidget {
                                                   color: Colors.grey,
                                                   fontSize: 14.5)),
                                         ])
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      width:
+                                  ],
+                                ),
+                                SizedBox(
+                                  width:
                                       MediaQuery.of(context).size.width * 0.06,
-                                    ),
-                                    const VerticalDivider(
-                                      thickness: 1,
-                                      color: Colors.grey,
-                                    ),
-                                    SizedBox(
-                                      width:
+                                ),
+                                const VerticalDivider(
+                                  thickness: 1,
+                                  color: Colors.grey,
+                                ),
+                                SizedBox(
+                                  width:
                                       MediaQuery.of(context).size.width * 0.06,
-                                    ),
-                                    Column(
-                                      children: [
-                                        Wrap(direction: Axis.vertical, children: const [
+                                ),
+                                Column(
+                                  children: [
+                                    Wrap(
+                                        direction: Axis.vertical,
+                                        children: const [
                                           Text(' Evening',
                                               style: TextStyle(
                                                   color: Colors.grey,
@@ -275,10 +271,10 @@ class Timing_Screen extends StatelessWidget {
                                                   color: Colors.grey,
                                                   fontSize: 14.5)),
                                         ])
-                                      ],
-                                    ),
                                   ],
-                                )),
+                                ),
+                              ],
+                            )),
                           )
                         ],
                       ),

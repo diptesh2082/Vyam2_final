@@ -1,28 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:scroll_snap_list/scroll_snap_list.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
-import 'Home/bookings/gym_details.dart';
+class TrainerScreen extends StatefulWidget {
+  const TrainerScreen({Key? key}) : super(key: key);
 
-class TrainerScreen extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      builder: () => MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: Trainer(),
-      ),
-    );
-  }
+  _TrainerScreenState createState() => _TrainerScreenState();
 }
 
-class Trainer extends StatefulWidget {
-  @override
-  _TrainerState createState() => _TrainerState();
-}
-
-class _TrainerState extends State<Trainer> {
+class _TrainerScreenState extends State<TrainerScreen> {
   int _current = 0;
   List trainers = [
     "assets/trainer1.png",
@@ -49,12 +38,11 @@ class _TrainerState extends State<Trainer> {
           title: const Text(
             'Know your trainer',
             textAlign: TextAlign.center,
-            style: const TextStyle(color: Colors.black, fontSize: 16),
+            style: TextStyle(color: Colors.black, fontSize: 16),
           ),
           leading: GestureDetector(
             onTap: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Screen1()));
+              Get.back();
             },
             child: const Icon(
               Icons.arrow_back,

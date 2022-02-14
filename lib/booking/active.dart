@@ -14,7 +14,6 @@ class ActiveEvent extends StatelessWidget {
         super(key: key);
 
   final double _width;
-  List events = [];
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +28,14 @@ class ActiveEvent extends StatelessWidget {
           }
           if (snapshot.hasData) {
             final data = snapshot.requireData;
+            if (data.size == 0) {
+              return Center(
+                child: Image.asset(
+                  "assets/icons/activeEmpty.png",
+                  height: _width * 0.8,
+                ),
+              );
+            }
             return Padding(
               padding: const EdgeInsets.only(top: 30.0),
               child: ListView.builder(
@@ -58,7 +65,7 @@ class ActiveEvent extends StatelessWidget {
                             width: _width * 0.9,
                             child: Row(
                               children: [
-                                Expanded(
+                                Flexible(
                                     flex: 1,
                                     child: Padding(
                                       padding: const EdgeInsets.only(
@@ -200,15 +207,15 @@ class ActiveEvent extends StatelessWidget {
                                         ],
                                       ),
                                     )),
-                                Expanded(
+                                Flexible(
                                     child: ClipRRect(
                                   borderRadius: BorderRadius.circular(10),
                                   child: Image.network(
-                                    data.dos[index]['image'],
+                                    data.docs[index]['image'],
                                     fit: BoxFit.cover,
                                     height: 150,
                                   ),
-                                ))
+                                )),
                               ],
                             ),
                           ),
@@ -220,7 +227,7 @@ class ActiveEvent extends StatelessWidget {
           }
           return Center(
             child: Image.asset(
-              "assets/icons/bookingEmpty.png",
+              "assets/icons/activeEmpty.png",
               height: _width * 0.8,
             ),
           );

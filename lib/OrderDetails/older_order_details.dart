@@ -64,10 +64,19 @@ class _OlderOderDetailsState extends State<OlderOderDetails> {
                   children: [
                     Row(
                       children: [
-                        Expanded(
-                            flex: 1,
-                            child: getOderDetails[widget.index].gymImage),
-                        Expanded(
+                        Flexible(
+                            child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.network(
+                              getOderDetails[widget.index]['image'],
+                              fit: BoxFit.cover,
+                              height: 150,
+                            ),
+                          ),
+                        )),
+                        Flexible(
                           flex: 1,
                           child: Padding(
                             padding:
@@ -78,7 +87,7 @@ class _OlderOderDetailsState extends State<OlderOderDetails> {
                               children: [
                                 Text(
                                   "Booking ID : " +
-                                      getOderDetails[widget.index].bookindID,
+                                      getOderDetails[widget.index]['id'],
                                   style: GoogleFonts.poppins(
                                       color: HexColor("3A3A3A"),
                                       fontSize: 12,
@@ -88,7 +97,7 @@ class _OlderOderDetailsState extends State<OlderOderDetails> {
                                   height: 4,
                                 ),
                                 Text(
-                                  getOderDetails[widget.index].gymName,
+                                  getOderDetails[widget.index]['gym_name'],
                                   style: GoogleFonts.poppins(
                                       color: HexColor("3A3A3A"),
                                       fontSize: 14,
@@ -104,7 +113,7 @@ class _OlderOderDetailsState extends State<OlderOderDetails> {
                                       width: 4.5,
                                     ),
                                     Text(
-                                      getOderDetails[widget.index].location,
+                                      getOderDetails[widget.index]['location'],
                                       style: GoogleFonts.poppins(
                                           color: HexColor("3A3A3A"),
                                           fontSize: 14,
@@ -117,61 +126,74 @@ class _OlderOderDetailsState extends State<OlderOderDetails> {
                                 ),
                                 Row(
                                   children: [
-                                    Text(
-                                      getOderDetails[widget.index].date,
-                                      style: GoogleFonts.poppins(
-                                          color: HexColor("A3A3A3"),
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.only(left: 35.0),
-                                      child: Image.asset(
-                                        "assets/icons/Bookings-bx_bxs-direction-right.png",
-                                        height: 20,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                          color: HexColor("F2994A"),
-                                          shape: BoxShape.circle),
-                                      width: 5,
-                                      height: 5,
+                                    Column(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Text(
+                                              "End on :",
+                                              style: GoogleFonts.poppins(
+                                                  color: HexColor("A3A3A3"),
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                            Text(
+                                              getOderDetails[widget.index]
+                                                  ['end_date'],
+                                              style: GoogleFonts.poppins(
+                                                  color: HexColor("A3A3A3"),
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                  color: HexColor("F2994A"),
+                                                  shape: BoxShape.circle),
+                                              width: 5,
+                                              height: 5,
+                                            ),
+                                            const SizedBox(
+                                              width: 5,
+                                            ),
+                                            Text(
+                                              "Completed",
+                                              style: GoogleFonts.poppins(
+                                                  color: HexColor("3A3A3A"),
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
                                     ),
                                     const SizedBox(
                                       width: 5,
                                     ),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          "Completed",
-                                          style: GoogleFonts.poppins(
-                                              color: HexColor("3A3A3A"),
-                                              fontSize: 10,
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 30.0),
-                                          child: Column(
-                                            children: [
-                                              Text(
-                                                "Navigate",
-                                                style: GoogleFonts.poppins(
-                                                    color: HexColor("49C000"),
-                                                    fontSize: 10,
-                                                    fontWeight:
-                                                        FontWeight.w500),
-                                              ),
-                                            ],
+                                    const Spacer(),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(right: 20.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Image.asset(
+                                            "assets/icons/bx_bxs-direction-right.png",
+                                            height: 20,
                                           ),
-                                        )
-                                      ],
+                                          Text(
+                                            "Navigate",
+                                            style: GoogleFonts.poppins(
+                                                color: HexColor("49C000"),
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.w500),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -180,31 +202,20 @@ class _OlderOderDetailsState extends State<OlderOderDetails> {
                                 ),
                                 Row(
                                   children: [
-                                    Icon(
-                                      Icons.star,
-                                      color: HexColor("FFC700"),
-                                      size: 15,
+                                    const SizedBox(
+                                      width: 5,
                                     ),
-                                    Icon(
-                                      Icons.star,
-                                      color: HexColor("FFC700"),
-                                      size: 15,
-                                    ),
-                                    Icon(
-                                      Icons.star,
-                                      color: HexColor("FFC700"),
-                                      size: 15,
-                                    ),
-                                    Icon(
-                                      Icons.star,
-                                      color: HexColor("FFC700"),
-                                      size: 15,
-                                    ),
-                                    Icon(
-                                      Icons.star,
-                                      color: HexColor("FFC700"),
-                                      size: 15,
-                                    ),
+                                    for (int i = 1;
+                                        i <=
+                                            int.parse(
+                                                getOderDetails[widget.index]
+                                                    ['rating']);
+                                        i++)
+                                      Icon(
+                                        Icons.star,
+                                        color: HexColor("FFC700"),
+                                        size: 15,
+                                      ),
                                     const SizedBox(
                                       width: 5,
                                     ),
@@ -263,16 +274,15 @@ class _OlderOderDetailsState extends State<OlderOderDetails> {
                               fontSize: 20, fontWeight: FontWeight.w700),
                         ),
                         const Spacer(),
-                        if (getOderDetails[widget.index]
-                            .bookingPeriod
+                        if (getOderDetails[widget.index]['workout']
                             .contains("Pay"))
                           Text(
-                            getOderDetails[widget.index].bookingPeriod,
+                            getOderDetails[widget.index]['workout']
+                                .toUpperCase(),
                             style: GoogleFonts.poppins(
                                 fontSize: 20, fontWeight: FontWeight.w700),
                           ),
-                        if (getOderDetails[widget.index]
-                            .bookingPeriod
+                        if (getOderDetails[widget.index]['workout']
                             .contains("Months"))
                           Row(
                             children: [
@@ -282,7 +292,8 @@ class _OlderOderDetailsState extends State<OlderOderDetails> {
                                     fontSize: 20, fontWeight: FontWeight.w700),
                               ),
                               Text(
-                                getOderDetails[widget.index].bookingPeriod,
+                                getOderDetails[widget.index]['workout']
+                                    .toUpperCase(),
                                 style: GoogleFonts.poppins(
                                     fontSize: 20, fontWeight: FontWeight.w700),
                               ),
@@ -299,7 +310,7 @@ class _OlderOderDetailsState extends State<OlderOderDetails> {
                         ),
                         const Spacer(),
                         Text(
-                          getOderDetails[widget.index].bookingPeriod,
+                          getOderDetails[widget.index]['workout'].toUpperCase(),
                           style: GoogleFonts.poppins(
                               fontSize: 18, fontWeight: FontWeight.w400),
                         ),
@@ -314,7 +325,7 @@ class _OlderOderDetailsState extends State<OlderOderDetails> {
                         ),
                         const Spacer(),
                         Text(
-                          getOderDetails[widget.index].startDate,
+                          getOderDetails[widget.index]['start_date'],
                           style: GoogleFonts.poppins(
                               fontSize: 18, fontWeight: FontWeight.w400),
                         ),
@@ -329,7 +340,7 @@ class _OlderOderDetailsState extends State<OlderOderDetails> {
                         ),
                         const Spacer(),
                         Text(
-                          getOderDetails[widget.index].endDate,
+                          getOderDetails[widget.index]['end_date'],
                           style: GoogleFonts.poppins(
                               fontSize: 18, fontWeight: FontWeight.w400),
                         ),
@@ -373,7 +384,7 @@ class _OlderOderDetailsState extends State<OlderOderDetails> {
                         ),
                         const Spacer(),
                         Text(
-                          "\$" "${getOderDetails[widget.index].amount}",
+                          "Rs " + getOderDetails[widget.index]['total_amount'],
                           style: GoogleFonts.poppins(
                               fontSize: 18, fontWeight: FontWeight.w400),
                         ),
@@ -388,7 +399,7 @@ class _OlderOderDetailsState extends State<OlderOderDetails> {
                         ),
                         const Spacer(),
                         Text(
-                          "\$" "${getOderDetails[widget.index].discount}",
+                          getOderDetails[widget.index]['discount'],
                           style: GoogleFonts.poppins(
                               fontSize: 18, fontWeight: FontWeight.w400),
                         ),
@@ -403,7 +414,7 @@ class _OlderOderDetailsState extends State<OlderOderDetails> {
                         ),
                         const Spacer(),
                         Text(
-                          "${getOderDetails[widget.index].promocode}",
+                          getOderDetails[widget.index]['promocode'],
                           style: GoogleFonts.poppins(
                               fontSize: 18, fontWeight: FontWeight.w400),
                         ),
@@ -420,8 +431,7 @@ class _OlderOderDetailsState extends State<OlderOderDetails> {
                         ),
                         const Spacer(),
                         Text(
-                          "\$"
-                          "${getOderDetails[widget.index].amount - getOderDetails[widget.index].discount}",
+                          "Rs " + getOderDetails[widget.index]['grand_total'],
                           style: GoogleFonts.poppins(
                               fontSize: 21,
                               fontWeight: FontWeight.w700,
@@ -444,8 +454,7 @@ class _OlderOderDetailsState extends State<OlderOderDetails> {
                       color: Colors.amber, shape: BoxShape.circle),
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
-                    child: Image.asset(
-                        "assets/icons/Bookings-order details-vuesax-linear-vuesax-linear-message-question.png"),
+                    child: Image.asset("assets/icons/message-question.png"),
                   ),
                 )
               ],

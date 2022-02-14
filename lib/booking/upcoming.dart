@@ -42,6 +42,14 @@ class UpcomingEvent extends StatelessWidget {
           }
           if (snapshot.hasData) {
             final data = snapshot.requireData;
+            if (data.size == 0) {
+              return Center(
+                child: Image.asset(
+                  "assets/icons/upcomingEmpty.png",
+                  height: _width * 0.8,
+                ),
+              );
+            }
             return Padding(
               padding: const EdgeInsets.only(top: 30.0),
               child: ListView.builder(
@@ -206,7 +214,7 @@ class UpcomingEvent extends StatelessWidget {
           }
           return Center(
             child: Image.asset(
-              "assets/icons/bookingEmpty.png",
+              "assets/icons/upcomingEmpty.png",
               height: _width * 0.8,
             ),
           );

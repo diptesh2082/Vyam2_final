@@ -89,3 +89,13 @@ class ActiveBookingApi {
       .collection("active_booking")
       .snapshots();
 }
+
+class OlderBookingApi {
+  Stream<QuerySnapshot> getOlderBooking = FirebaseFirestore.instance
+      .collection('user_details')
+      .doc(number)
+      .collection("bookings")
+      .doc("older")
+      .collection("older_booking")
+      .snapshots();
+}

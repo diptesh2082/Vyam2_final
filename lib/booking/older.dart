@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:vyam_2_final/OrderDetails/older_order_details.dart';
+import 'package:vyam_2_final/api/api.dart';
 // import 'package:vyambooking/List/list.dart';
 // import 'package:vyambooking/OrderDetails/older_order_details.dart';
 // import 'package:vyambooking/OrderDetails/order_details.dart';
@@ -9,6 +11,7 @@ import 'package:vyam_2_final/OrderDetails/older_order_details.dart';
 import '../controllers/gym_detail.dart';
 
 class OlderEvent extends StatelessWidget {
+  OlderBookingApi olderBookingApi = OlderBookingApi();
   OlderEvent({
     Key? key,
     required double width,
@@ -18,22 +21,11 @@ class OlderEvent extends StatelessWidget {
   final double _width;
   List events = [];
 
-  Future OlderEventsList() async {
-    events = olderEventItems;
-    await Future.delayed(const Duration(milliseconds: 700));
-    if (events.isNotEmpty) {
-      return events;
-    }
-    if (events.isEmpty) {
-      return null;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-        future: OlderEventsList(),
-        builder: (context, snapshot) {
+    return StreamBuilder<QuerySnapshot>(
+        stream: olderBookingApi.getOlderBooking,
+        builder: (context, AsyncSnapshot snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           }
@@ -41,10 +33,19 @@ class OlderEvent extends StatelessWidget {
             return Text(snapshot.error.toString());
           }
           if (snapshot.hasData) {
+            final data = snapshot.requireData;
+            if (data.size == 0) {
+              return Center(
+                child: Image.asset(
+                  "assets/icons/olderEmpty.png",
+                  height: _width * 0.8,
+                ),
+              );
+            }
             return Padding(
               padding: const EdgeInsets.only(top: 30.0),
               child: ListView.builder(
-                  itemCount: olderEventItems.length,
+                  itemCount: data.docs.length,
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -55,7 +56,7 @@ class OlderEvent extends StatelessWidget {
                               MaterialPageRoute(
                                   builder: (context) => OlderOderDetails(
                                         index: index,
-                                        orderList: olderEventItems,
+                                        orderList: data.docs,
                                       )));
                         },
                         child: Card(
@@ -70,7 +71,7 @@ class OlderEvent extends StatelessWidget {
                             width: _width * 0.9,
                             child: Row(
                               children: [
-                                Expanded(
+                                Flexible(
                                     flex: 1,
                                     child: Padding(
                                       padding: const EdgeInsets.only(
@@ -83,8 +84,7 @@ class OlderEvent extends StatelessWidget {
                                         children: [
                                           Text(
                                             "Booking ID : " +
-                                                olderEventItems[index]
-                                                    .bookindID,
+                                                data.docs[index]['id'],
                                             style: GoogleFonts.poppins(
                                                 color: HexColor("3A3A3A"),
                                                 fontSize: 12,
@@ -94,7 +94,7 @@ class OlderEvent extends StatelessWidget {
                                             height: 4,
                                           ),
                                           Text(
-                                            olderEventItems[index].gymName,
+                                            data.docs[index]['gym_name'],
                                             style: GoogleFonts.poppins(
                                                 color: HexColor("3A3A3A"),
                                                 fontSize: 14,
@@ -110,7 +110,7 @@ class OlderEvent extends StatelessWidget {
                                                 width: 4.5,
                                               ),
                                               Text(
-                                                olderEventItems[index].location,
+                                                data.docs[index]['location'],
                                                 style: GoogleFonts.poppins(
                                                     color: HexColor("3A3A3A"),
                                                     fontSize: 14,
@@ -122,9 +122,12 @@ class OlderEvent extends StatelessWidget {
                                           const SizedBox(
                                             height: 6,
                                           ),
-                                          if (olderEventItems[index]
-                                              .bookingPeriod
-                                              .contains("Month"))
+                                          if (data.docs[index]["workout"]
+                                                  .contains("months") ||
+                                              data.docs[index]["workout"]
+                                                  .contains("Months") ||
+                                              data.docs[index]["workout"]
+                                                  .contains("month"))
                                             Row(
                                               children: [
                                                 Text(
@@ -136,8 +139,8 @@ class OlderEvent extends StatelessWidget {
                                                           FontWeight.w700),
                                                 ),
                                                 Text(
-                                                  olderEventItems[index]
-                                                      .bookingPeriod,
+                                                  data.docs[index]['workout']
+                                                      .toUpperCase(),
                                                   style: GoogleFonts.poppins(
                                                       fontSize: 12,
                                                       color: HexColor("3A3A3A"),
@@ -146,12 +149,13 @@ class OlderEvent extends StatelessWidget {
                                                 ),
                                               ],
                                             ),
-                                          if (olderEventItems[index]
-                                              .bookingPeriod
-                                              .contains("Pay"))
+                                          if (data.docs[index]['workout']
+                                                  .contains("Pay") ||
+                                              data.docs[index]['workout']
+                                                  .contains("pay"))
                                             Text(
-                                              olderEventItems[index]
-                                                  .bookingPeriod,
+                                              data.docs[index]['workout']
+                                                  .toUpperCase(),
                                               style: GoogleFonts.poppins(
                                                   fontSize: 12,
                                                   color: HexColor("3A3A3A"),
@@ -161,7 +165,7 @@ class OlderEvent extends StatelessWidget {
                                             height: 6,
                                           ),
                                           Text(
-                                            olderEventItems[index].date,
+                                            data.docs[index]['end_date'],
                                             style: GoogleFonts.poppins(
                                                 color: HexColor("A3A3A3"),
                                                 fontSize: 12,
@@ -174,7 +178,7 @@ class OlderEvent extends StatelessWidget {
                                             width: 2,
                                           ),
                                           Text(
-                                            olderEventItems[index].eventType,
+                                            data.docs[index]['type'],
                                             style: GoogleFonts.poppins(
                                                 color: HexColor("3A3A3A"),
                                                 fontSize: 10,
@@ -185,42 +189,16 @@ class OlderEvent extends StatelessWidget {
                                           ),
                                           Row(
                                             children: [
-                                              Text(
-                                                olderEventItems[index].rating,
-                                                style: GoogleFonts.poppins(
-                                                    color: HexColor("3A3A3A"),
-                                                    fontSize: 10,
-                                                    fontWeight:
-                                                        FontWeight.w500),
-                                              ),
-                                              const SizedBox(
-                                                width: 5,
-                                              ),
-                                              Icon(
-                                                Icons.star,
-                                                color: HexColor("FFC700"),
-                                                size: 15,
-                                              ),
-                                              Icon(
-                                                Icons.star,
-                                                color: HexColor("FFC700"),
-                                                size: 15,
-                                              ),
-                                              Icon(
-                                                Icons.star,
-                                                color: HexColor("FFC700"),
-                                                size: 15,
-                                              ),
-                                              Icon(
-                                                Icons.star,
-                                                color: HexColor("FFC700"),
-                                                size: 15,
-                                              ),
-                                              Icon(
-                                                Icons.star,
-                                                color: HexColor("FFC700"),
-                                                size: 15,
-                                              ),
+                                              for (int i = 1;
+                                                  i <=
+                                                      int.parse(data.docs[index]
+                                                          ['rating']);
+                                                  i++)
+                                                Icon(
+                                                  Icons.star,
+                                                  color: HexColor("FFC700"),
+                                                  size: 15,
+                                                ),
                                               const SizedBox(
                                                 width: 5,
                                               ),
@@ -241,9 +219,15 @@ class OlderEvent extends StatelessWidget {
                                         ],
                                       ),
                                     )),
-                                Expanded(
-                                    flex: 1,
-                                    child: olderEventItems[index].gymImage),
+                                Flexible(
+                                    child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Image.network(
+                                    data.docs[index]['image'],
+                                    fit: BoxFit.cover,
+                                    height: 150,
+                                  ),
+                                )),
                               ],
                             ),
                           ),
@@ -255,7 +239,7 @@ class OlderEvent extends StatelessWidget {
           }
           return Center(
             child: Image.asset(
-              "assets/icons/bookingEmpty.png",
+              "assets/icons/olderEmpty.png",
               height: _width * 0.8,
             ),
           );
